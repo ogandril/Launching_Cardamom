@@ -13,6 +13,8 @@ P=3 # Experiment within project
 SFT=15 # time scale factor
 CC=12 # cell cycle time:
 T=2 #threshold for interactions 
+sf=10 # scaling factor
+#In order to provide a more comprehensive representation of the network's dynamics, amplify the scaling factor applied to the network's edges.
 
 cwd = os.getcwd()
 
@@ -47,10 +49,9 @@ os.chdir(str(cwd)+"/OG"+str(D))
 if Infer:
 	os.system( "python infer_network.py -i " +str(P))
 
-#In order to provide a more comprehensive representation of the network's dynamics, amplify the scaling factor applied to the network's edges.
 os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/cardamom")
 fi=np.load('inter.npy')
-fi=fi*10
+fi=fi*sf
 # Cut off low intensity edges
 fi[abs(fi) < T] = 0
 # Save the resulting matrix
