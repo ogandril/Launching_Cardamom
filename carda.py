@@ -8,11 +8,11 @@ import matplotlib.pyplot as plt
 from harissa.utils import build_pos, plot_network
 
 # Hyperparameters
-D=3449 # project name
-P=3 # Experiment within project
-SFT=15 # time scale factor
+D=3461 # project name
+P=7 # Experiment within project
+SFT=12 # time scale factor
 CC=12 # cell cycle time:
-T=2 #threshold for interactions 
+T=6 #threshold for interactions 
 sf=10 # scaling factor
 #In order to provide a more comprehensive representation of the network's dynamics, amplify the scaling factor applied to the network's edges.
 
@@ -42,7 +42,7 @@ os.system("mkdir Rates")
 os.system("mkdir cardamom")
 
 # Launch R script to generate entry files
-os.system("Rscript --vanilla  "+str(cwd)+"/res_carda/OG3449_3.R "+str(SFT)+" "+str(CC)+" "+str(P)+" "+str(D))
+os.system("Rscript --vanilla  "+str(cwd)+"/res_carda/3461_4.R "+str(SFT)+" "+str(CC)+" "+str(P)+" "+str(D))
 
 # Infer GRN
 os.chdir(str(cwd)+"/OG"+str(D))
