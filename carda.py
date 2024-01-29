@@ -17,10 +17,10 @@ sf=10 # scaling factor: in order to provide a more comprehensive representation 
 seq="SST" # sequence of events to be modelized
 cwd = os.getcwd()
 
-Infer=1# to infer the GRN
-Simulate=1 # to simulate the GRN
-Visualize=1 # to visualize some output
-Kanto=1 # to compute Kantorovich distances
+Infer=0# to infer the GRN
+Simulate=0 # to simulate the GRN
+Visualize=0 # to visualize some output
+Kanto=0 # to compute Kantorovich distances
 Draw=1 #to draw the GRN
 
 # Create a working directory
@@ -41,10 +41,7 @@ os.system("mkdir Rates")
 os.system("mkdir cardamom")
 
 # Launch R script to generate entry files
-#os.system("Rscript --vanilla  "+str(cwd)+"/res_carda/3461_3.R "+str(SFT)+" "+str(CC)+" "+str(P)+" "+str(D))
-#os.system("Rscript --vanilla  "+str(cwd)+"/res_carda/SSN.R "+str(SFT)+" "+str(CC)+" "+str(P)+" "+str(D))
 os.system("Rscript --vanilla  "+str(cwd)+"/res_carda/"+str(seq)+".R "+str(SFT)+" "+str(CC)+" "+str(P)+" "+str(D))
-
 
 # Infer GRN
 os.chdir(str(cwd)+"/OG"+str(D))
@@ -61,7 +58,6 @@ if Infer:
 	# Save the resulting matrix
 	np.save('inter.npy', fi)
 	np.save('inter_t.npy', fi_t)
-	np.savetxt("inter_matrix.csv", fi, delimiter=",")
 
 # Simulate
 os.chdir(str(cwd)+"/OG"+str(D))
