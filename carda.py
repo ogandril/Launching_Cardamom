@@ -13,7 +13,8 @@ P=3 # Experiment within project
 SFT=12 # time scale factor
 CC=12 # cell cycle time:
 T=5 #threshold for interactions 
-sf=10 # scaling factor: in order to provide a more comprehensive representation of the network's dynamics, amplify the scaling factor applied to the network's edges.
+sf=10 # scaling factor: in order to provide a more comprehensive representation of the network's dynamics,
+# amplify the scaling factor applied to the network's edges.
 seq="SST" # sequence of events to be modelized
 cwd = os.getcwd()
 
@@ -47,6 +48,8 @@ os.system("Rscript --vanilla  "+str(cwd)+"/res_carda/"+str(seq)+".R "+str(SFT)+"
 os.chdir(str(cwd)+"/OG"+str(D))
 if Infer:
 	os.system( "python infer_network.py -i " +str(P))
+
+# Modify the resulting matrix	
 	os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/cardamom")
 	fi=np.load('inter.npy')
 	fi_t=np.load('inter_t.npy')
@@ -58,6 +61,12 @@ if Infer:
 	# Save the resulting matrix
 	np.save('inter.npy', fi)
 	np.save('inter_t.npy', fi_t)
+	# Same for time-dependent matrix
+	for i in range(0, len(fi_t)):	
+			fi = np.load('inter_{}.npy'.format(i))	
+			fi=fi*sf
+			fi[abs(fi) < T] = 0
+			np.save('inter_{}.npy'.format(i), fi)
 
 # Simulate
 os.chdir(str(cwd)+"/OG"+str(D))
