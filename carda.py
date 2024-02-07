@@ -51,16 +51,16 @@ if Infer:
 
 # Modify the resulting matrix	
 	os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/cardamom")
-	fi=np.load('inter.npy')
-	fi_t=np.load('inter_t.npy')
-	fi=fi*sf
-	fi_t=fi_t*sf
+	fi=sf*np.load('inter.npy')
+	fi_t=sf*np.load('inter_t.npy')
+	basal = sf*np.load('basal.npy')
 	# Cut off low intensity edges
 	fi[abs(fi) < T] = 0
 	fi_t[abs(fi_t) < T] = 0
 	# Save the resulting matrix
 	np.save('inter.npy', fi)
 	np.save('inter_t.npy', fi_t)
+	np.save('basal.npy', basal)
 	# Same for time-dependent matrix
 	for i in range(0, len(fi_t)):	
 			fi = np.load('inter_{}.npy'.format(i))	
