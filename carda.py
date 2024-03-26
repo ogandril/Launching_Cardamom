@@ -8,14 +8,14 @@ import matplotlib.pyplot as plt
 from harissa.utils import build_pos, plot_network
 
 # Hyperparameters
-D=3462 # project name
-P=3 # Experiment within project
+D=3484 # project name
+P=1 # Experiment within project
 SFT=12 # time scale factor
 CC=12 # cell cycle time:
 T=5 #threshold for interactions 
 sf=10 # scaling factor: in order to provide a more comprehensive representation of the network's dynamics,
 # amplify the scaling factor applied to the network's edges.
-seq="SST" # sequence of events to be modelized
+seq="OOOM" # sequence of events to be modelized
 cwd = os.getcwd()
 
 Infer=0# to infer the GRN
@@ -33,7 +33,7 @@ os.system("cp  "+str(cwd)+"/cardamom/infer_network.py infer_network.py")
 os.system("cp  "+str(cwd)+"/cardamom/simulate_data.py simulate_data.py")
 os.system("cp  "+str(cwd)+"/cardamom/visualize_data.py visualize_data.py")
 os.system("cp  "+str(cwd)+"/cardamom/Kanto_2D.py Kanto_2D.py")
-os.system("cp  "+str(cwd)+"/cardamom/Draw_GRN.py Draw_GRN.py")
+os.system("cp  "+str(cwd)+"/cardamom/Draw_GRN_2.py Draw_GRN_2.py")
 os.system("mkdir " +str(P))
 os.chdir(str(P))
 os.system("mkdir Data")
