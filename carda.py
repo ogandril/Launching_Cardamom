@@ -83,8 +83,7 @@ if Kanto:
 
 # Draw the GRN
 if Draw:
-	p="python Draw_GRN.py " +str(D)+" "+ str(P)+" "+ str(T) +" " + str(cwd)
-	os.system("python Draw_GRN.py " +str(D)+" "+ str(P)+" "+ str(T)+" " + str(cwd))
+	os.system("python Draw_GRN_2.py " +str(D)+" "+ str(P)+" "+ str(T)+" " + str(cwd))
 
 # Write parameter values
 os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/Results")
