@@ -8,21 +8,23 @@ import matplotlib.pyplot as plt
 from harissa.utils import build_pos, plot_network
 
 # Hyperparameters
-D=3484 # project name
-P=1 # Experiment within project
+D=3487# project name
+P=7# Experiment within project
 SFT=12 # time scale factor
 CC=12 # cell cycle time:
-T=5 #threshold for interactions 
+T=8 #threshold for interactions 
 sf=10 # scaling factor: in order to provide a more comprehensive representation of the network's dynamics,
 # amplify the scaling factor applied to the network's edges.
-seq="OOOM" # sequence of events to be modelized
+seq="OOOM_Nx" # sequence of events to be modelized
 cwd = os.getcwd()
+transfert=0
+rval=25
 
-Infer=0# to infer the GRN
-Simulate=0 # to simulate the GRN
-Visualize=0 # to visualize some output
+Infer=1# to infer the GRN
+Simulate=1 # to simulate the GRN
+Visualize=1 # to visualize some output
 Kanto=0 # to compute Kantorovich distances
-Draw=1 #to draw the GRN
+Draw=0 #to draw the GRN
 
 # Create a working directory
 os.system("mkdir "+str(cwd)+"/OG"+str(D))
@@ -71,7 +73,7 @@ if Infer:
 # Simulate
 os.chdir(str(cwd)+"/OG"+str(D))
 if Simulate:
-	os.system( "python simulate_data.py -i " +str(P))
+	os.system( "python simulate_data.py -i " +str(P)+" -t "+str(transfert) +" -r " +str(rval))
 
 # Visualize
 if Visualize:
@@ -87,7 +89,11 @@ if Draw:
 
 # Write parameter values
 os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/Results")
-text = ['time scale factor: '+str(SFT), "cell cycle time: " + str(CC), "sequence modelized: " +str(seq)]
+text = ['time scale factor: '+str(SFT), 
+"cell cycle time: " + str(CC), 
+"sequence modelized: " +str(seq),
+"Transfert: "+str(transfert),
+"rval: "+str(rval)]
 with open('parameters', 'w') as f:
 	for line in text:
         	f.write(line)
