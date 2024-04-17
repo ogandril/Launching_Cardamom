@@ -9,16 +9,15 @@ from harissa.utils import build_pos, plot_network
 
 # Hyperparameters
 D=3487# project name
-P=7# Experiment within project
+P=19# Experiment within project
 SFT=12 # time scale factor
 CC=12 # cell cycle time:
 T=8 #threshold for interactions 
-sf=10 # scaling factor: in order to provide a more comprehensive representation of the network's dynamics,
-# amplify the scaling factor applied to the network's edges.
-seq="OOOM_Nx" # sequence of events to be modelized
+sf=10 # scaling factor: in order to provide a more comprehensive representation of the network's dynamics# amplify the scaling factor applied to the network's edges.
+seq="OOOM_Hx" # sequence of events to be modelized
 cwd = os.getcwd()
-transfert=0
-rval=25
+transfert=1
+rval=2.5
 
 Infer=1# to infer the GRN
 Simulate=1 # to simulate the GRN
@@ -61,6 +60,9 @@ if Infer:
 	fi_t[abs(fi_t) < T] = 0
 	# Save the resulting matrix
 	np.save('inter.npy', fi)
+
+	np.savetxt('inter.csv', fi, delimiter=",")
+
 	np.save('inter_t.npy', fi_t)
 	np.save('basal.npy', basal)
 	# Same for time-dependent matrix
@@ -69,6 +71,8 @@ if Infer:
 			fi=fi*sf
 			fi[abs(fi) < T] = 0
 			np.save('inter_{}.npy'.format(i), fi)
+
+			np.savetxt('inter_{}.csv'.format(i), fi, delimiter=",")
 
 # Simulate
 os.chdir(str(cwd)+"/OG"+str(D))
@@ -93,7 +97,9 @@ text = ['time scale factor: '+str(SFT),
 "cell cycle time: " + str(CC), 
 "sequence modelized: " +str(seq),
 "Transfert: "+str(transfert),
-"rval: "+str(rval)]
+"rval: "+str(rval),
+"Threshold: "+str(T),
+"Scaling factor: "+str(sf)]
 with open('parameters', 'w') as f:
 	for line in text:
         	f.write(line)
