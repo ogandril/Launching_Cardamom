@@ -22,7 +22,7 @@ rval=2.5
 Infer=1# to infer the GRN
 Simulate=1 # to simulate the GRN
 Visualize=1 # to visualize some output
-Kanto=0 # to compute Kantorovich distances
+Kanto=1 # to compute Kantorovich distances
 Draw=0 #to draw the GRN
 
 # Create a working directory
@@ -85,7 +85,7 @@ if Visualize:
 
 # Compute Kanto distances
 if Kanto:
-	os.system("python Kanto_2D.py " +str(D)+" "+ str(P)+" "+str(cwd))
+	os.system("python Kanto_1D_OG.py" +str(D)+" "+ str(P)+" "+str(cwd))
 
 # Draw the GRN
 if Draw:
