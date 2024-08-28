@@ -18,10 +18,11 @@ seq="OOOM_Hx" # sequence of events to be modelized
 cwd = os.getcwd()
 transfert=1
 rval=2.5
+percent_valid=0.4 # percentage of KD values to be considered as valid
 
-Infer=1# to infer the GRN
-Simulate=1 # to simulate the GRN
-Visualize=1 # to visualize some output
+Infer=0 # to infer the GRN
+Simulate=0 # to simulate the GRN
+Visualize=0 # to visualize some output
 Kanto=1 # to compute Kantorovich distances
 Draw=0 #to draw the GRN
 
@@ -33,7 +34,7 @@ os.chdir(str(cwd)+"/OG"+str(D))
 os.system("cp  "+str(cwd)+"/cardamom/infer_network.py infer_network.py")
 os.system("cp  "+str(cwd)+"/cardamom/simulate_data.py simulate_data.py")
 os.system("cp  "+str(cwd)+"/cardamom/visualize_data.py visualize_data.py")
-os.system("cp  "+str(cwd)+"/cardamom/Kanto_2D.py Kanto_2D.py")
+os.system("cp  "+str(cwd)+"/cardamom/Kanto_1D_OG.py Kanto_1D_OG.py")
 os.system("cp  "+str(cwd)+"/cardamom/Draw_GRN_2.py Draw_GRN_2.py")
 os.system("mkdir " +str(P))
 os.chdir(str(P))
@@ -85,7 +86,7 @@ if Visualize:
 
 # Compute Kanto distances
 if Kanto:
-	os.system("python Kanto_1D_OG.py" +str(D)+" "+ str(P)+" "+str(cwd))
+	os.system("python Kanto_1D_OG.py " +str(D)+ " " + str(P)+ " " + str(cwd) + " " +  str(percent_valid))
 
 # Draw the GRN
 if Draw:
@@ -99,7 +100,8 @@ text = ['time scale factor: '+str(SFT),
 "Transfert: "+str(transfert),
 "rval: "+str(rval),
 "Threshold: "+str(T),
-"Scaling factor: "+str(sf)]
+"Scaling factor: "+str(sf),
+"Percentage of correct values: "+str(percent_valid)]
 with open('parameters', 'w') as f:
 	for line in text:
         	f.write(line)
