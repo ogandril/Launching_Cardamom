@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 from harissa.utils import build_pos, plot_network
 
 # Hyperparameters
-D=3487# project name
-P=19# Experiment within project
+D=3511 # project name
+P=1 # Experiment within project
 SFT=12 # time scale factor
 CC=12 # cell cycle time:
 T=8 #threshold for interactions 
@@ -18,13 +18,13 @@ seq="OOOM_Hx" # sequence of events to be modelized
 cwd = os.getcwd()
 transfert=1
 rval=2.5
-percent_valid=0.4 # percentage of KD values to be considered as valid
+percent_valid=0.55 # percentage of KD values to be considered as valid
 
-Infer=0 # to infer the GRN
-Simulate=0 # to simulate the GRN
-Visualize=0 # to visualize some output
+Infer=1# to infer the GRN
+Simulate=1 # to simulate the GRN
+Visualize=1 # to visualize some output
 Kanto=1 # to compute Kantorovich distances
-Draw=0 #to draw the GRN
+Draw=1 #to draw the GRN
 
 # Create a working directory
 os.system("mkdir "+str(cwd)+"/OG"+str(D))
@@ -46,10 +46,12 @@ os.system("mkdir cardamom")
 # Launch R script to generate entry files
 os.system("Rscript --vanilla  "+str(cwd)+"/res_carda/"+str(seq)+".R "+str(SFT)+" "+str(CC)+" "+str(P)+" "+str(D))
 
+# Move to the central cardamom directory (cwd)
+os.chdir("../")
+
 # Infer GRN
-os.chdir(str(cwd)+"/OG"+str(D))
 if Infer:
-	os.system( "python infer_network.py -i " +str(P))
+	os.system( "python infer_network.py -i " + str(cwd)+"/OG"+str(D)+"/"+str(P))
 
 # Modify the resulting matrix	
 	os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/cardamom")
@@ -82,7 +84,7 @@ if Simulate:
 
 # Visualize
 if Visualize:
-	os.system( "python visualize_data.py -i " +str(P))
+	os.system( "python visualize_data.py -i " +str(P)+ " " +str(percent_valid))
 
 # Compute Kanto distances
 if Kanto:
