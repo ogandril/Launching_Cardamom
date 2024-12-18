@@ -19,7 +19,7 @@ cwd = os.getcwd()
 rval=2.5
 percent_valid=0.6 # percentage of KD values to be considered as valid
 KO=0
-Gene_to_KO='PENK'
+Gene_to_KO='None'
 
 Infer=1# to infer the GRN
 Simulate=1# to simulate the GRN
@@ -149,7 +149,6 @@ text = ['time scale factor: '+str(SFT),
 "Percentage of correct values: "+str(percent_valid)],
 "KO: "+str(KO),
 "Knocked_out gene: "+str(Gene_to_KO)
-
 with open('parameters', 'w') as f:
 	for line in text:
         	f.write(line)
