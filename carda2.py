@@ -62,6 +62,7 @@ basal = np.load('basal.npy')
 inter = np.load('inter.npy')
 kmin = np.load('kmin.npy')
 inter_t=np.load('inter_t.npy')
+basal_t=np.load('basal_t.npy')
 
 # Modify interactions values
 fi=sf*inter
