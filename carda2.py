@@ -96,26 +96,26 @@ np.save('basal.npy', basal)
 np.save('inter.npy', inter)
 
 # KO
-	if KO:
+if KO:
 # Find the index of the gene 
-		os.chdir("/pbs/home/o/ogandril/OG"+str(D)+"/"+str(P)+"/Data")
+	os.chdir("/pbs/home/o/ogandril/OG"+str(D)+"/"+str(P)+"/Data")
 
-		with open('../Data/Genenames.txt') as f:
-			Genenames = f.read().splitlines()
+	with open('../Data/Genenames.txt') as f:
+		Genenames = f.read().splitlines()
 
-		i=Genenames.index(Gene_to_KO)
+	i=Genenames.index(Gene_to_KO)
 
-		os.chdir("/pbs/home/o/ogandril/OG"+str(D)+"/"+str(P)+"/cardamom")
-		basal= np.load('basal.npy')
-		basal[i]=  -1000
+	os.chdir("/pbs/home/o/ogandril/OG"+str(D)+"/"+str(P)+"/cardamom")
+	basal= np.load('basal.npy')
+	basal[i]=  -1000
 
 # Valeur minimale de k_on
-		kmin = np.load('kmin.npy')
-		kmin[i] =  0 # Devrait déjà être proche de 0
+	kmin = np.load('kmin.npy')
+	kmin[i] =  0 # Devrait déjà être proche de 0
 
 # Save the modified files
-		np.save('basal.npy', basal) # Récupérer ce fichier et le renommer 'basal_t.npy'
-		np.save('kmin.npy', kmin) # Récupérer ce fichier et le renommer 'kmin.npy'
+	np.save('basal.npy', basal) # Récupérer ce fichier et le renommer 'basal_t.npy'
+	np.save('kmin.npy', kmin) # Récupérer ce fichier et le renommer 'kmin.npy'
 
 
 
