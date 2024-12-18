@@ -18,11 +18,15 @@ seq="OOOM_Hx" # sequence of events to be modelized
 cwd = os.getcwd()
 transfert=1
 rval=2.5
+<<<<<<< HEAD
+percent_valid=0.4 # percentage of KD values to be considered as valid
+=======
 percent_valid=0.55 # percentage of KD values to be considered as valid
+>>>>>>> d3acfe6eb3c97c3a72e2982f96afa0b54db8d673
 
-Infer=1# to infer the GRN
-Simulate=1 # to simulate the GRN
-Visualize=1 # to visualize some output
+Infer=0 # to infer the GRN
+Simulate=0 # to simulate the GRN
+Visualize=0 # to visualize some output
 Kanto=1 # to compute Kantorovich distances
 Draw=1 #to draw the GRN
 
