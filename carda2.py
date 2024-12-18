@@ -16,10 +16,11 @@ T=4 #threshold for interactions
 sf=10 # scaling factor: in order to provide a more comprehensive representation of the network's dynamics# amplify the scaling factor applied to the network's edges.
 seq="3519_5" # R script to be launched
 cwd = os.getcwd()
-rval=2.5
+rval=2.5 #transfer the basal regulation in the diagonal of the interaction matrix with a given intensity
 percent_valid=0.6 # percentage of KD values to be considered as valid
 KO=0
 Gene_to_KO='None'
+
 
 Infer=1# to infer the GRN
 Simulate=1# to simulate the GRN
