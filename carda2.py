@@ -143,7 +143,6 @@ os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/Results")
 text = ['time scale factor: '+str(SFT), 
 "cell cycle time: " + str(CC), 
 "sequence modelized: " +str(seq),
-"Transfert: "+str(transfert),
 "rval: "+str(rval),
 "Threshold: "+str(T),
 "Scaling factor: "+str(sf),
