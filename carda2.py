@@ -146,9 +146,9 @@ text = ['time scale factor: '+str(SFT),
 "rval: "+str(rval),
 "Threshold: "+str(T),
 "Scaling factor: "+str(sf),
-"Percentage of correct values: "+str(percent_valid)],
+"Percentage of correct values: "+str(percent_valid),
 "KO: "+str(KO),
-"Knocked_out gene: "+str(Gene_to_KO)
+"Knocked_out gene: "+str(Gene_to_KO)]
 with open('parameters', 'w') as f:
 	for line in text:
         	f.write(line)
