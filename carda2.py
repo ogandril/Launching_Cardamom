@@ -66,7 +66,7 @@ inter_t=np.load('inter_t.npy')
 # Modify interactions values
 fi=sf*inter
 basal = sf*basal
-fi_t=sf*ninter_t
+fi_t=sf*inter_t
 
 # Cut off low intensity edges
 fi[abs(fi) < T] = 0
