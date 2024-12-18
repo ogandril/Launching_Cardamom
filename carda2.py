@@ -61,10 +61,12 @@ if Infer:
 basal = np.load('basal.npy')
 inter = np.load('inter.npy')
 kmin = np.load('kmin.npy')
+inter_t=np.load('inter_t.npy')
 
 # Modify interactions values
 fi=sf*inter
 basal = sf*basal
+fi_t=sf*ninter_t
 
 # Cut off low intensity edges
 fi[abs(fi) < T] = 0
