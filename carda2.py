@@ -56,7 +56,7 @@ if Infer:
 	os.system( "python infer_network.py -i " + str(cwd)+"/OG"+str(D)+"/"+str(P))
 
 # Modify the resulting matrix	
-	os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/cardamom")
+os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/cardamom")
 
 # Open files
 basal = np.load('basal.npy')
@@ -95,8 +95,12 @@ inter[:, :] = inter_t[-1][:, :] + (1 - rval/G) * np.diag(basal_t[-1])
 inter[1:, 1:] /= (1 - .6 * rval/G)
 inter -= np.diag(np.diag(inter)) * .6 * rval/G
 basal[:] = rval/G * basal_t[-1]
+
+os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/cardamom")
 np.save('basal.npy', basal)
+np.save('basal2.npy', basal)
 np.save('inter.npy', inter)
+
 
 # KO
 if KO:
