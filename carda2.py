@@ -63,37 +63,37 @@ inter = np.load('inter.npy')
 kmin = np.load('kmin.npy')
 
 # Modify interactions values
-	fi=sf*inter
-	basal = sf*basal
+fi=sf*inter
+basal = sf*basal
 
-	# Cut off low intensity edges
-	fi[abs(fi) < T] = 0
-	fi_t[abs(fi_t) < T] = 0
-	# Save the resulting matrix
-	np.save('inter.npy', fi)
-	np.savetxt('inter.csv', fi, delimiter=",")
+# Cut off low intensity edges
+fi[abs(fi) < T] = 0
+fi_t[abs(fi_t) < T] = 0
+# Save the resulting matrix
+np.save('inter.npy', fi)
+np.savetxt('inter.csv', fi, delimiter=",")
 
-	np.save('basal.npy', basal)
+np.save('basal.npy', basal)
 
-	# Same for time-dependent matrix
-	for i in range(0, len(fi_t)):	
-			fi = np.load('inter_{}.npy'.format(i))	
-			fi=fi*sf
-			fi[abs(fi) < T] = 0
-			np.save('inter_{}.npy'.format(i), fi)
-			np.savetxt('inter_{}.csv'.format(i), fi, delimiter=",")
+# Same for time-dependent matrix
+for i in range(0, len(fi_t)):	
+		fi = np.load('inter_{}.npy'.format(i))	
+		fi=fi*sf
+		fi[abs(fi) < T] = 0
+		np.save('inter_{}.npy'.format(i), fi)
+		np.savetxt('inter_{}.csv'.format(i), fi, delimiter=",")
 
 # Add transfert 
-	os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/Data")
-	data_real = np.loadtxt('panel_real.txt', dtype=float, delimiter='\t')[1:, 1:].T
-    C, G = data_real.shape
+os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/Data")
+data_real = np.loadtxt('panel_real.txt', dtype=float, delimiter='\t')[1:, 1:].T
+C, G = data_real.shape
 
-    inter[:, :] = inter_t[-1][:, :] + (1 - rval/G) * np.diag(basal_t[-1])
-	inter[1:, 1:] /= (1 - .6 * rval/G)
-	inter -= np.diag(np.diag(inter)) * .6 * rval/G
-	basal[:] = rval/G * basal_t[-1]
-	np.save('basal.npy', basal)
-	np.save('inter.npy', inter)
+inter[:, :] = inter_t[-1][:, :] + (1 - rval/G) * np.diag(basal_t[-1])
+inter[1:, 1:] /= (1 - .6 * rval/G)
+inter -= np.diag(np.diag(inter)) * .6 * rval/G
+basal[:] = rval/G * basal_t[-1]
+np.save('basal.npy', basal)
+np.save('inter.npy', inter)
 
 # KO
 	if KO:
