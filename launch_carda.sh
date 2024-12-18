@@ -1,9 +1,8 @@
 #!/bin/bash
 #
-#SBATCH --job-name=3443
-#SBATCH --time=0-01:00:00
-#SBATCH --partition=Cascade
+#SBATCH --job-name=3519_1
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=olivier.gandrillon@ens-lyon.fr
-
-python carda.py
+module add python
+module load Programming_Languages/R/latest
+python carda2.py
