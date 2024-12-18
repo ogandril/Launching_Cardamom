@@ -68,7 +68,6 @@ basal = sf*basal
 
 # Cut off low intensity edges
 fi[abs(fi) < T] = 0
-fi_t[abs(fi_t) < T] = 0
 # Save the resulting matrix
 np.save('inter.npy', fi)
 np.savetxt('inter.csv', fi, delimiter=",")
