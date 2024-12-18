@@ -58,9 +58,9 @@ if Infer:
 	os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/cardamom")
 
 # Open files
-    basal = np.load('basal.npy')
-    inter = np.load('inter.npy')
-	kmin = np.load('kmin.npy')
+basal = np.load('basal.npy')
+inter = np.load('inter.npy')
+kmin = np.load('kmin.npy')
 
 # Modify interactions values
 	fi=sf*inter
