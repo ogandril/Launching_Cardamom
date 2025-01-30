@@ -8,19 +8,20 @@ import matplotlib.pyplot as plt
 from harissa.utils import build_pos, plot_network
 
 # Hyperparameters
-D=3526 # project name
-P=5# Experiment within project
+D=3533 # project name
+P=2 #Experiment within project
 SFT=4 # time scale factor
-CC=2 # cell cycle time:
+CC=20 # cell cycle time:
+f=1 # Stabilizing factor for mRNA (slow down the model)
 T=4 #threshold for interactions 
 sf=10 # scaling factor: in order to provide a more comprehensive representation of the network's dynamics# amplify the scaling factor applied to the network's edges.
 seq="3519_5" # R script to be launched
 cwd = os.getcwd()
 rval=2.5 #transfer the basal regulation in the diagonal of the interaction matrix with a given intensity
-percent_valid=0.6 # percentage of KD values to be considered as valid
-KO=0
-Gene_to_KO='None'
-
+percent_valid=0.5 # percentage of KD values to be considered as valid
+KO=0 # 1 if a KO should be made
+Gene_to_KO='CHGA' #name of the gene to knock down
+m=0 #Maximum value forced into the KD table
 
 Infer=1# to infer the GRN
 Simulate=1# to simulate the GRN
@@ -46,7 +47,7 @@ os.system("mkdir Rates")
 os.system("mkdir cardamom")
 
 # Launch R script to generate entry files
-os.system("Rscript --vanilla  "+str(cwd)+"/res_carda/"+str(seq)+".R "+str(SFT)+" "+str(CC)+" "+str(P)+" "+str(D))
+os.system("Rscript --vanilla  "+str(cwd)+"/res_carda/"+str(seq)+".R "+str(SFT)+" "+str(CC)+" "+str(P)+" "+str(D)+" "+str(f))
 
 # Move to the central cardamom directory (cwd)
 os.chdir("../")
@@ -137,7 +138,7 @@ if Visualize:
 
 # Compute Kanto distances
 if Kanto:
-	os.system("python Kanto_1D_OG.py " +str(D)+ " " + str(P)+ " " + str(cwd) + " " +  str(percent_valid))
+	os.system("python Kanto_1D_OG.py " +str(D)+ " " + str(P)+ " " + str(cwd) + " " +  str(percent_valid)+ " " +  str(m))
 
 # Draw the GRN
 if Draw:
@@ -153,7 +154,8 @@ text = ['time scale factor: '+str(SFT),
 "Scaling factor: "+str(sf),
 "Percentage of correct values: "+str(percent_valid),
 "KO: "+str(KO),
-"Knocked_out gene: "+str(Gene_to_KO)]
+"Knocked_out gene: "+str(Gene_to_KO),
+"Max KD value: "+str(m)]
 with open('parameters', 'w') as f:
 	for line in text:
         	f.write(line)
