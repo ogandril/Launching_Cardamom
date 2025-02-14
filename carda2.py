@@ -7,27 +7,36 @@ import numpy as np
 import matplotlib.pyplot as plt
 from harissa.utils import build_pos, plot_network
 
+##################
 # Hyperparameters
+# Pathways and files
+cwd = os.getcwd()
 D=3533 # project name
 P=2 #Experiment within project
+seq="3519_5" # R script to be launched
+# Time sensitive parameters
 SFT=4 # time scale factor
 CC=20 # cell cycle time:
-f=1 # Stabilizing factor for mRNA (slow down the model)
-T=4 #threshold for interactions 
+f=10 # Stabilizing factor for mRNA (slow down the model)
+# Modifying interaction values
 sf=10 # scaling factor: in order to provide a more comprehensive representation of the network's dynamics# amplify the scaling factor applied to the network's edges.
-seq="3519_5" # R script to be launched
-cwd = os.getcwd()
+T=4 #threshold for interactions 
 rval=2.5 #transfer the basal regulation in the diagonal of the interaction matrix with a given intensity
+# Visulaization parameters
 percent_valid=0.5 # percentage of KD values to be considered as valid
+m=0 #Maximum value forced into the KD table
+# Modifying the GRN
 KO=0 # 1 if a KO should be made
 Gene_to_KO='CHGA' #name of the gene to knock down
-m=0 #Maximum value forced into the KD table
+Overexpression=0  # If a gene should be overexpressed
+Gene_to_overexpress='CHGB' #name of the gene to overexpress
 
+# Which function should be executed
 Infer=1# to infer the GRN
 Simulate=1# to simulate the GRN
 Visualize=1 # to visualize some output
 Kanto=1 # to compute Kantorovich distances
-Draw=1 #to draw the GRN
+Draw=0 #to draw the GRN
 
 # Create a working directory
 os.system("mkdir "+str(cwd)+"/OG"+str(D))
@@ -124,6 +133,24 @@ if KO:
 # Save the modified files
 	np.save('basal.npy', basal) # Récupérer ce fichier et le renommer 'basal_t.npy'
 	np.save('kmin.npy', kmin) # Récupérer ce fichier et le renommer 'kmin.npy'
+
+
+# Overexpression
+if Overexpression:
+# Find the index of the gene 
+	os.chdir("/pbs/home/o/ogandril/OG"+str(D)+"/"+str(P)+"/Data")
+
+	with open('../Data/Genenames.txt') as f:
+		Genenames = f.read().splitlines()
+
+	i=Genenames.index(Gene_to_overexpress)
+
+	os.chdir("/pbs/home/o/ogandril/OG"+str(D)+"/"+str(P)+"/cardamom")
+	basal= np.load('basal.npy')
+	basal[i]=  100
+
+# Save the modified files
+	np.save('basal.npy', basal) # Récupérer ce fichier et le renommer 'basal_t.npy'
 
 
 
