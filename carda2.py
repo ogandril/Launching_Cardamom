@@ -149,9 +149,13 @@ if Overexpression:
 	basal= np.load('basal.npy')
 	basal[i]=  100
 
+# Augmenter la valeur de k_on
+	kmax = np.load('kmax.npy')
+	kmax[i] = 10
+
 # Save the modified files
 	np.save('basal.npy', basal) # Récupérer ce fichier et le renommer 'basal_t.npy'
-
+	np.save('kmax.npy', kmax) # Récupérer ce fichier et le renommer 'kmax.npy'
 
 
 # Simulate
