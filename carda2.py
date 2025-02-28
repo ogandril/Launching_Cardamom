@@ -11,8 +11,8 @@ from harissa.utils import build_pos, plot_network
 # Hyperparameters
 # Pathways and files
 cwd = os.getcwd()
-D=3533 # project name
-P=2 #Experiment within project
+D=3539 # project name
+P=5 #Experiment within project
 seq="3519_5" # R script to be launched
 # Time sensitive parameters
 SFT=4 # time scale factor
@@ -28,8 +28,8 @@ m=0 #Maximum value forced into the KD table
 # Modifying the GRN
 KO=0 # 1 if a KO should be made
 Gene_to_KO='CHGA' #name of the gene to knock down
-Overexpression=0  # If a gene should be overexpressed
-Gene_to_overexpress='CHGB' #name of the gene to overexpress
+Overexpression=1  # If a gene should be overexpressed
+Gene_to_overexpress='HMGB2' #name of the gene to overexpress
 
 # Which function should be executed
 Infer=1# to infer the GRN
@@ -151,7 +151,7 @@ if Overexpression:
 
 # Augmenter la valeur de k_on
 	kmax = np.load('kmax.npy')
-	kmax[i] = 10
+	kmax[i] = 5
 
 # Save the modified files
 	np.save('basal.npy', basal) # Récupérer ce fichier et le renommer 'basal_t.npy'
@@ -185,7 +185,9 @@ text = ['time scale factor: '+str(SFT),
 "Scaling factor: "+str(sf),
 "Percentage of correct values: "+str(percent_valid),
 "KO: "+str(KO),
-"Knocked_out gene: "+str(Gene_to_KO),
+"Knocked-out gene: "+str(Gene_to_KO),
+"Overexpression: "+str(Overexpression),
+"Overexpressed gene: "+str(Gene_to_overexpress),
 "Max KD value: "+str(m)]
 with open('parameters', 'w') as f:
 	for line in text:
