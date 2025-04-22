@@ -11,9 +11,9 @@ from harissa.utils import build_pos, plot_network
 # Hyperparameters
 # Pathways and files
 cwd = os.getcwd()
-D=3539 # project name
-P=5 #Experiment within project
-seq="3519_5" # R script to be launched
+D=3552 # project name
+P=1 #Experiment within project
+seq="3552_7" # R script to be launched
 # Time sensitive parameters
 SFT=4 # time scale factor
 CC=20 # cell cycle time:
