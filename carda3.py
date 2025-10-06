@@ -25,8 +25,8 @@ f=10 # Stabilizing factor for mRNA (slow down the model)
 # Which function should be executed
 transform=1 # old to new
 Infer=1# to infer the GRN
-simulate=1# to infer the GRN
-perturb=1# to infer the GRN
+simulate=0# to infer the GRN
+perturb=0# to infer the GRN
 
 # Create a working directory
 os.system(f"mkdir {cwd}/OG{D}")
@@ -57,12 +57,12 @@ if transform:
 	os.system(f"python convert_old_data_to_ad.py -i {cwd}/OG{D}/{P}")
 	os.system(f"python add_degradations_to_ad.py -i {cwd}/OG{D}/{P}")
 
-# Infer GRN
+# Launch V2 scripts
 path_3 = f"{cwd}/CardaSC"
 os.chdir(path_3)
 
 if Infer:
-	print("infer_mixture") 
+	os.system(echo "infer_mixture")
 	os.system(f"python infer_mixture.py -i {cwd}/OG{D}/{P} -s full")
 	print("infer_network")
 	os.system(f"python infer_network.py -i {cwd}/OG{D}/{P} -s full")
