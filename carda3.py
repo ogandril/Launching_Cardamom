@@ -62,7 +62,7 @@ path_3 = f"{cwd}/CardaSC"
 os.chdir(path_3)
 
 if Infer:
-	os.system(echo "infer_mixture")
+	os.system(echo 'infer_mixture')
 	os.system(f"python infer_mixture.py -i {cwd}/OG{D}/{P} -s full")
 	print("infer_network")
 	os.system(f"python infer_network.py -i {cwd}/OG{D}/{P} -s full")
