@@ -77,11 +77,11 @@ if simulate:
 
 if perturb:
 	print("Simulate KOV") 
-	os.system(f"python simulate_network_KOV.py -i {cwd}/OG{D}/{P} -s full -k "('HMGB1',),('TCF4',),)" -o "('HMGB1',),('TCF4',),)"")
+	#os.system(f"python simulate_network_KOV.py -i {cwd}/OG{D}/{P} -s full -k "('HMGB1',),('TCF4',),)" -o "('HMGB1',),('TCF4',),)"")
 
 	#python simulate_network_KOV.py -i "${file}" 
 	print("Check KOV")
-	python check_KOV_to_sim.py -i "${file}" -k "('HMGB1',),('TCF4',),)" -o "('HMGB1',),('TCF4',),)"	
+	#python check_KOV_to_sim.py -i "${file}" -k "('HMGB1',),('TCF4',),)" -o "('HMGB1',),('TCF4',),)"	
 
 print('My work here is done')
 
