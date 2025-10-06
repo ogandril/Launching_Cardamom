@@ -25,15 +25,16 @@ f=10 # Stabilizing factor for mRNA (slow down the model)
 # Which function should be executed
 transform=1 # old to new
 Infer=1# to infer the GRN
-simulate=0# to infer the GRN
+simulate=1# to infer the GRN
 perturb=0# to infer the GRN
 
 # Create a working directory
 os.system(f"mkdir {cwd}/OG{D}")
 path_1 = (f"{cwd}/OG{D}")
 
-# Copy carda3.py
+# Copy carda3.py and the R script
 os.system("cp  carda3.py "+path_1)
+os.system("cp  {cwd}/res_carda/{seq}.R  "+path_1)
 
 # Create a working subdirectory
 os.chdir(path_1)
