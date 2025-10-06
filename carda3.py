@@ -64,23 +64,23 @@ os.chdir(path_3)
 if Infer:
 	os.system("echo 'infer_mixture'")
 	os.system(f"python infer_mixture.py -i {cwd}/OG{D}/{P} -s full")
-	print("infer_network")
+	os.system("echo 'infer_network'")
 	os.system(f"python infer_network.py -i {cwd}/OG{D}/{P} -s full")
-	print("adapt_to_unitary")
+	os.system("echo 'adapt_to_unitary'")
 	os.system(f"python adapt_to_unitary.py -i {cwd}/OG{D}/{P} -s full")
 
 if simulate:	
-	print("simulate_network") 
+	os.system("echo 'simulate_network'")
 	os.system(f"python simulate_network.py -i {cwd}/OG{D}/{P} -s full")
-	print("check_sim_to_data") 
+	os.system("echo 'check_sim_to_data'")
 	os.system(f"python check_sim_to_data.py -i {cwd}/OG{D}/{P} -s full")
 
 if perturb:
-	print("Simulate KOV") 
+	os.system("echo 'simulate_network_KOV'")
 	#os.system(f"python simulate_network_KOV.py -i {cwd}/OG{D}/{P} -s full -k "('HMGB1',),('TCF4',),)" -o "('HMGB1',),('TCF4',),)"")
 
 	#python simulate_network_KOV.py -i "${file}" 
-	print("Check KOV")
+	os.system("echo 'check_KOV_to_sim'")
 	#python check_KOV_to_sim.py -i "${file}" -k "('HMGB1',),('TCF4',),)" -o "('HMGB1',),('TCF4',),)"	
 
 print('My work here is done')
