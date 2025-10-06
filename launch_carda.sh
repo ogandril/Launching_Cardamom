@@ -5,4 +5,5 @@
 #SBATCH --mail-user=olivier.gandrillon@ens-lyon.fr
 module add python
 module load Programming_Languages/R/latest
-python carda2.py
+source carda/bin/activate.csh
+python carda3.py

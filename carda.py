@@ -18,7 +18,6 @@ seq="OOOM_Hx" # sequence of events to be modelized
 cwd = os.getcwd()
 transfert=1
 rval=2.5
-<<<<<<< HEAD
 percent_valid=0.4 # percentage of KD values to be considered as valid
 =======
 percent_valid=0.55 # percentage of KD values to be considered as valid
