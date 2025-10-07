@@ -38,7 +38,7 @@ os.chdir(f"{cwd}/")
 # Copy carda3.py and the R script
 path_2 = (f"{cwd}/OG{D}/{P}")
 os.system("cp  carda3.py "+path_2)
-os.system("cp  /res_carda/{seq}.R "+path_2)
+os.system("cp  res_carda/{seq}.R "+path_2)
 
 # Create cardamom folders
 os.chdir(path_2)
@@ -78,11 +78,9 @@ if simulate:
 
 if perturb:
 	os.system("echo 'simulate_network_KOV'")
-	#os.system(f"python simulate_network_KOV.py -i {cwd}/OG{D}/{P} -s full -k "('HMGB1',),('TCF4',),)" -o "('HMGB1',),('TCF4',),)"")
-
-	#python simulate_network_KOV.py -i "${file}" 
+	os.system(f"python simulate_network_KOV.py -i {cwd}/OG{D}/{P} -s full -k "('FUS',),('KMT2E',)" -o "('FUS',),('KMT2E',)"")
 	os.system("echo 'check_KOV_to_sim'")
-	#python check_KOV_to_sim.py -i "${file}" -k "('HMGB1',),('TCF4',),)" -o "('HMGB1',),('TCF4',),)"	
+	os.system(f"python check_KOV_to_sim.py -i {cwd}/OG{D}/{P} -s full -k "('FUS',),('TCF4',)" -o "('KMT2E',),('KMT2E',)"")
 
 print('My work here is done')
 
