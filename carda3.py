@@ -6,8 +6,6 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-import warnings
-warnings.filterwarnings("ignore")
 
 ##################
 # Hyperparameters
@@ -32,16 +30,18 @@ perturb=0# to infer the GRN
 os.system(f"mkdir {cwd}/OG{D}")
 path_1 = (f"{cwd}/OG{D}")
 
-# Copy carda3.py and the R script
-os.system("cp  carda3.py "+path_1)
-os.system("cp  /res_carda/{seq}.R "+path_1)
-
 # Create a working subdirectory
 os.chdir(path_1)
 os.system(f"mkdir {P}")
-os.chdir(f"{P}")
+os.chdir(f"{cwd}/")
+
+# Copy carda3.py and the R script
+path_2 = (f"{cwd}/OG{D}/{P}")
+os.system("cp  carda3.py "+path_2)
+os.system("cp  /res_carda/{seq}.R "+path_2)
 
 # Create cardamom folders
+os.chdir(path_2)
 os.system("mkdir Data")
 os.system("mkdir Results")
 os.system("mkdir Rates")
@@ -51,16 +51,16 @@ os.system("mkdir cardamom")
 os.system(f"Rscript --vanilla  {cwd}/res_carda/{seq}.R {SFT} {CC} {P} {D} {f}")
 
 # Move to the Cardasc repository 
-path_2 = f"{cwd}/CardaSC/utils/old_to_new"
-os.chdir(path_2)
+path_3 = f"{cwd}/CardaSC/utils/old_to_new"
+os.chdir(path_3)
 
 if transform:
 	os.system(f"python convert_old_data_to_ad.py -i {cwd}/OG{D}/{P}")
 	os.system(f"python add_degradations_to_ad.py -i {cwd}/OG{D}/{P}")
 
 # Launch V2 scripts
-path_3 = f"{cwd}/CardaSC"
-os.chdir(path_3)
+path_4 = f"{cwd}/CardaSC"
+os.chdir(path_4)
 
 if Infer:
 	os.system("echo 'infer_mixture'")
