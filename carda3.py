@@ -22,12 +22,12 @@ seq="3598_3" # R script to be launched
 SFT=4 # time scale factor
 CC=20 # cell cycle time:
 f=10 # Stabilizing factor for mRNA (slow down the model)
-Genes = "('FUS',) ('KMT2E',)"
+Genes = ""('FUS',),('KMT2E',)""
 
 # Which function should be executed
-transform=1 # old to new
-Infer=1# to infer the GRN
-simulate=1# to infer the GRN
+transform=0 # old to new
+Infer=0# to infer the GRN
+simulate=0# to infer the GRN
 perturb=1# to infer the GRN
 
 # Create a working directory
