@@ -22,7 +22,7 @@ seq="3598_3" # R script to be launched
 SFT=4 # time scale factor
 CC=20 # cell cycle time:
 f=10 # Stabilizing factor for mRNA (slow down the model)
-Genes = ""('FUS',),('KMT2E',)""
+Genes = "('FUS',),('KMT2E',)"
 
 # Which function should be executed
 transform=0 # old to new
@@ -82,9 +82,9 @@ if simulate:
 
 if perturb:
 	os.system("echo 'simulate_network_KOV'")
-	os.system(f"python simulate_network_KOV.py -i {cwd}/OG{D}/{P} -s full -k {Genes} -o {Genes}")
+	os.system(f"python simulate_network_KOV.py -i {cwd}/OG{D}/{P} -s full -k \"{Genes}\" -o \"{Genes}\"")
 	os.system("echo 'check_KOV_to_sim'")
-	os.system(f"python check_KOV_to_sim.py -i {cwd}/OG{D}/{P} -s full -k {Genes} -o {Genes}")
-
+	os.system(f"python check_KOV_to_sim.py -i {cwd}/OG{D}/{P} -s full -k \"{Genes}\" -o \"{Genes}\"")
+	
 print('My work here is done')
 
