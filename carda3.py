@@ -3,6 +3,9 @@
 # Still requires specific R script at that stage 
 # Start from /pbs/home/o/ogandril/CardaSC
 
+import warnings
+warnings.filterwarnings("ignore")
+
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -19,12 +22,13 @@ seq="3598_3" # R script to be launched
 SFT=4 # time scale factor
 CC=20 # cell cycle time:
 f=10 # Stabilizing factor for mRNA (slow down the model)
+Genes = "('FUS',) ('KMT2E',)"
 
 # Which function should be executed
 transform=1 # old to new
 Infer=1# to infer the GRN
 simulate=1# to infer the GRN
-perturb=0# to infer the GRN
+perturb=1# to infer the GRN
 
 # Create a working directory
 os.system(f"mkdir {cwd}/OG{D}")
@@ -78,9 +82,9 @@ if simulate:
 
 if perturb:
 	os.system("echo 'simulate_network_KOV'")
-	os.system(f"python simulate_network_KOV.py -i {cwd}/OG{D}/{P} -s full -k "('FUS',),('KMT2E',)" -o "('FUS',),('KMT2E',)"")
+	os.system(f"python simulate_network_KOV.py -i {cwd}/OG{D}/{P} -s full -k {Genes} -o {Genes}")
 	os.system("echo 'check_KOV_to_sim'")
-	os.system(f"python check_KOV_to_sim.py -i {cwd}/OG{D}/{P} -s full -k "('FUS',),('TCF4',)" -o "('KMT2E',),('KMT2E',)"")
+	os.system(f"python check_KOV_to_sim.py -i {cwd}/OG{D}/{P} -s full -k {Genes} -o {Genes}")
 
 print('My work here is done')
 
