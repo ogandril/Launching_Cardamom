@@ -1,10 +1,7 @@
-# Launch CARDAMOM in one command line
+# Launch CARDAMOM.V2 in one command line
 # create a new directory for each parameter combination
 # Still requires specific R script at that stage 
-# Start from /pbs/home/o/ogandril/CardaSC
-
-import warnings
-warnings.filterwarnings("ignore")
+# Start from /pbs/home/o/ogandril/
 
 import os
 import numpy as np
@@ -21,14 +18,14 @@ seq="3598_3" # R script to be launched
 # Time sensitive parameters
 SFT=4 # time scale factor
 CC=20 # cell cycle time:
-f=10 # Stabilizing factor for mRNA (slow down the model)
-Genes = "('FUS',),('HMGB1',),('KMT2E',)"
+f=10 # Stabilizing factor for mRNA (slows down the model)
+Genes = "('FUS',),('HMGB1',),('KMT2E',)" # Genes to be perturbed
 
 # Which function should be executed
 transform=1 # old to new
 Infer=1# to infer the GRN
-simulate=1# to infer the GRN
-perturb=1# to infer the GRN
+simulate=1# to simulate the GRN
+perturb=1# to perturb the GRN (KO/OV)
 
 # Create a working directory
 os.system(f"mkdir {cwd}/OG{D}")
@@ -47,7 +44,6 @@ os.system(f"cp  res_carda/{seq}.R "+path_2)
 # Create cardamom folders
 os.chdir(path_2)
 os.system("mkdir Data")
-os.system("mkdir Results")
 os.system("mkdir Rates")
 os.system("mkdir cardamom")
 
@@ -59,6 +55,7 @@ path_3 = f"{cwd}/CardaSC/utils/old_to_new"
 os.chdir(path_3)
 
 if transform:
+	os.system("echo 'old_to_new'")
 	os.system(f"python convert_old_data_to_ad.py -i {cwd}/OG{D}/{P}")
 	os.system(f"python add_degradations_to_ad.py -i {cwd}/OG{D}/{P}")
 
