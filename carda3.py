@@ -41,7 +41,7 @@ os.chdir(f"{cwd}/")
 
 # Copy carda3.py and the R script
 path_2 = (f"{cwd}/OG{D}/{P}")
-os.system("cp  carda3.py "+path_2)
+os.system("cp  Launching_Cardamom/carda3.py "+path_2)
 os.system(f"cp  res_carda/{seq}.R "+path_2)
 
 # Create cardamom folders
