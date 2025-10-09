@@ -12,9 +12,9 @@ import matplotlib.pyplot as plt
 # Pathways and files
 cwd = os.getcwd()
 
-D=3604 # project name
+D=3610 # project name
 P=1 #Experiment within project
-seq="3598_3" # R script to be launched
+seq="3591_1" # R script to be launched
 # Time sensitive parameters
 SFT=4 # time scale factor
 CC=20 # cell cycle time:
@@ -25,7 +25,7 @@ Genes = "('FUS',),('HMGB1',),('KMT2E',)" # Genes to be perturbed
 transform=1 # old to new
 Infer=1# to infer the GRN
 simulate=1# to simulate the GRN
-perturb=1# to perturb the GRN (KO/OV)
+perturb=0# to perturb the GRN (KO/OV)
 
 # Create a working directory
 os.system(f"mkdir {cwd}/OG{D}")
