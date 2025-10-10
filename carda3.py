@@ -13,19 +13,19 @@ import matplotlib.pyplot as plt
 cwd = os.getcwd()
 
 D=3610 # project name
-P=1 #Experiment within project
+P=2 #Experiment within project
 seq="3591_1" # R script to be launched
 # Time sensitive parameters
-SFT=4 # time scale factor
+SFT=10 # time scale factor
 CC=20 # cell cycle time:
 f=10 # Stabilizing factor for mRNA (slows down the model)
-Genes = "('FUS',),('HMGB1',),('KMT2E',)" # Genes to be perturbed
+Genes = "('PCNA',),('NRP2',)" # Genes to be perturbed
 
 # Which function should be executed
 transform=1 # old to new
 Infer=1# to infer the GRN
 simulate=1# to simulate the GRN
-perturb=0# to perturb the GRN (KO/OV)
+perturb=1# to perturb the GRN (KO/OV)
 
 # Create a working directory
 os.system(f"mkdir {cwd}/OG{D}")
