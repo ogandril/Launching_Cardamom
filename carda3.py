@@ -6,6 +6,7 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 
 ##################
 # Hyperparameters
@@ -77,14 +78,16 @@ if simulate:
 	os.system(f"python check_sim_to_data.py -i {cwd}/OG{D}/{P} -s full")
 
 if perturb:
-	# Write the genes to perturb. POur le moment en dur
+	# Write the genes to perturb.
 	path_5 = (f"{cwd}/OG{D}/{P}/Data")
 	os.chdir(path_5)
 	fichier = open('list_KO.txt', 'w')
-	fichier.write("PCNA\n")
+	for arg in sys.argv[1:]:
+		fichier.write(str(arg+"\n"))
 	fichier.close()
 	fichier = open('list_OV.txt', 'w')
-	fichier.write("PCNA\n")
+	for arg in sys.argv[1:]:
+		fichier.write(str(arg+"\n"))
 	fichier.close()
 	# Excecute the perturbation
 	os.chdir(path_4)
