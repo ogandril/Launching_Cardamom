@@ -12,14 +12,13 @@ import matplotlib.pyplot as plt
 # Pathways and files
 cwd = os.getcwd()
 
-D=3610 # project name
-P=2 #Experiment within project
+D=3614 # project name
+P=1 #Experiment within project
 seq="3591_1" # R script to be launched
 # Time sensitive parameters
 SFT=10 # time scale factor
 CC=20 # cell cycle time:
 f=10 # Stabilizing factor for mRNA (slows down the model)
-Genes = "('PCNA',),('NRP2',)" # Genes to be perturbed
 
 # Which function should be executed
 transform=1 # old to new
@@ -78,6 +77,17 @@ if simulate:
 	os.system(f"python check_sim_to_data.py -i {cwd}/OG{D}/{P} -s full")
 
 if perturb:
+	# Write the genes to perturb. POur le moment en dur
+	path_5 = (f"{cwd}/OG{D}/{P}/Data")
+	os.chdir(path_5)
+	fichier = open('list_KO.txt', 'w')
+	fichier.write("PCNA\n")
+	fichier.close()
+	fichier = open('list_OV.txt', 'w')
+	fichier.write("PCNA\n")
+	fichier.close()
+	# Excecute the perturbation
+	os.chdir(path_4)
 	os.system("echo 'simulate_network_KOV'")
 	os.system(f"python simulate_network_KOV.py -i {cwd}/OG{D}/{P} -s full -k \"{Genes}\" -o \"{Genes}\"")
 	os.system("echo 'check_KOV_to_sim'")
