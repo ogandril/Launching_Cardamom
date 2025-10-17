@@ -60,7 +60,7 @@ if transform:
 	os.system(f"python add_degradations_to_ad.py -i {cwd}/OG{D}/{P}")
 
 # Launch V2 scripts
-path_4 = f"{cwd}/CardaSC"
+path_4 = f"{cwd}"
 os.chdir(path_4)
 
 if Infer:
