@@ -24,8 +24,8 @@ f=10 # Stabilizing factor for mRNA (slows down the model)
 # Which function should be executed
 transform=1 # old to new
 Infer=1# to infer the GRN
-simulate=1# to simulate the GRN
-perturb=1# to perturb the GRN (KO/OV)
+simulate=0# to simulate the GRN
+perturb=0# to perturb the GRN (KO/OV)
 
 # Create a working directory
 os.system(f"mkdir {cwd}/OG{D}")
@@ -64,6 +64,8 @@ path_4 = f"{cwd}/CardaSC"
 os.chdir(path_4)
 
 if Infer:
+	os.system("Select DE genes and split cells")
+	os.system(f"python select_DEgenes_and_split.py -i {cwd}/OG{D}/{P} -s full -r 0 -c 0.6")
 	os.system("echo 'infer_mixture'")
 	os.system(f"python infer_mixture.py -i {cwd}/OG{D}/{P} -s full")
 	os.system("echo 'infer_network'")
