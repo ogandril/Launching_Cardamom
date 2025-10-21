@@ -64,14 +64,16 @@ path_4 = f"{cwd}/CardaSC"
 os.chdir(path_4)
 
 if Infer:
-	os.system("Select DE genes and split cells")
-	os.system(f"python select_DEgenes_and_split.py -i {cwd}/OG{D}/{P} -s full -r 0 -c 0.6")
+	os.system("echo 'Select DE genes and split cells'")
+	os.system(f"python select_DEgenes_and_split.py -i {cwd}/OG{D}/{P} -s full -r 0 -c 1")
+	os.system("echo 'Get kinetic rates'")
+	os.system(f"python get_kinetic_rates.py -i {cwd}/OG{D}/{P} -s full")
 	os.system("echo 'infer_mixture'")
 	os.system(f"python infer_mixture.py -i {cwd}/OG{D}/{P} -s full")
-	os.system("echo 'infer_network'")
-	os.system(f"python infer_network.py -i {cwd}/OG{D}/{P} -s full")
-	os.system("echo 'adapt_to_unitary'")
-	os.system(f"python adapt_to_unitary.py -i {cwd}/OG{D}/{P} -s full")
+	os.system("echo 'Infer network structure'")
+	os.system(f"python infer_network_structure.py -i {cwd}/OG{D}/{P} -s full")
+	os.system("echo 'Infer network to simulate'")
+	os.system(f"python infer_network_simul.py -i {cwd}/OG{D}/{P} -s full")
 
 if simulate:	
 	os.system("echo 'simulate_network'")
