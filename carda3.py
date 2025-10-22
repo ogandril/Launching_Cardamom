@@ -24,8 +24,8 @@ f=10 # Stabilizing factor for mRNA (slows down the model)
 # Which function should be executed
 transform=1 # old to new
 Infer=1# to infer the GRN
-simulate=0# to simulate the GRN
-perturb=0# to perturb the GRN (KO/OV)
+simulate=1# to simulate the GRN
+perturb=1# to perturb the GRN (KO/OV)
 
 # Create a working directory
 os.system(f"mkdir {cwd}/OG{D}")
@@ -65,7 +65,7 @@ os.chdir(path_4)
 
 if Infer:
 	os.system("echo 'Select DE genes and split cells'")
-	os.system(f"python select_DEgenes_and_split.py -i {cwd}/OG{D}/{P} -s full -r 0 -c 1")
+	os.system(f"python select_DEgenes_and_split.py -i {cwd}/OG{D}/{P} -s full -r 0 -c 0")
 	os.system("echo 'Get kinetic rates'")
 	os.system(f"python get_kinetic_rates.py -i {cwd}/OG{D}/{P} -s full")
 	os.system("echo 'infer_mixture'")
