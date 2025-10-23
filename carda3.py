@@ -65,7 +65,7 @@ os.chdir(path_4)
 
 if Infer:
 	os.system("echo 'Select DE genes and split cells'")
-	os.system(f"python select_DEgenes_and_split.py -i {cwd}/OG{D}/{P} -s full -r 0 -c 0")
+	os.system(f"python select_DEgenes_and_split.py -i {cwd}/OG{D}/{P} -s full -c 0 -r 0.6")
 	os.system("echo 'Get kinetic rates'")
 	os.system(f"python get_kinetic_rates.py -i {cwd}/OG{D}/{P} -s full")
 	os.system("echo 'infer_mixture'")
@@ -75,7 +75,15 @@ if Infer:
 	os.system("echo 'Infer network to simulate'")
 	os.system(f"python infer_network_simul.py -i {cwd}/OG{D}/{P} -s full")
 
+# Save a csv version of the interaction matrix
+path_5 = (f"{cwd}/OG{D}/{P}/cardamom")
+os.chdir(path_4)
+inter = np.load('inter.npy')
+inter2D=inter[:, :, 0]
+np.savetxt('inter.csv', inter2D, delimiter=",")
+
 if simulate:	
+	os.chdir(path_4)
 	os.system("echo 'simulate_network'")
 	os.system(f"python simulate_network.py -i {cwd}/OG{D}/{P} -s full")
 	os.system("echo 'check_sim_to_data'")
@@ -83,8 +91,8 @@ if simulate:
 
 if perturb:
 	# Write the genes to perturb.
-	path_5 = (f"{cwd}/OG{D}/{P}/Data")
-	os.chdir(path_5)
+	path_6 = (f"{cwd}/OG{D}/{P}/Data")
+	os.chdir(path_6)
 	fichier = open('list_KO.txt', 'w')
 	for arg in sys.argv[1:]:
 		fichier.write(str(arg+"\n"))
