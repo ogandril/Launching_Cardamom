@@ -14,10 +14,10 @@ import sys
 cwd = os.getcwd()
 
 D=3614 # project name
-P=2 #Experiment within project
+P=3 #Experiment within project
 seq="3591_1" # R script to be launched
 # Time sensitive parameters
-SFT=10 # time scale factor
+SFT=25 # time scale factor
 CC=20 # cell cycle time:
 f=10 # Stabilizing factor for mRNA (slows down the model)
 Th_int=4 #threshold for interactions 
