@@ -81,7 +81,7 @@ if Infer:
 os.chdir(path_5)
 inter = np.load('inter.npy')
 # Cut off low intensity edges
-inter[abs(inter) < T] = 0
+inter[abs(inter) < Th_int] = 0
 # Save the resulting matrix
 np.save('inter.npy', inter)
 inter2D=inter[:, :, 0]
