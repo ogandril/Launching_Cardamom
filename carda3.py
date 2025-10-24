@@ -77,7 +77,7 @@ if Infer:
 
 # Save a csv version of the interaction matrix
 path_5 = (f"{cwd}/OG{D}/{P}/cardamom")
-os.chdir(path_4)
+os.chdir(path_5)
 inter = np.load('inter.npy')
 inter2D=inter[:, :, 0]
 np.savetxt('inter.csv', inter2D, delimiter=",")
