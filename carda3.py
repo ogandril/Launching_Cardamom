@@ -23,9 +23,9 @@ f=10 # Stabilizing factor for mRNA (slows down the model)
 Th_int=4 #threshold for interactions 
 
 # Which function should be executed
-transform=0 # old to new
-Infer=0# to infer the GRN
-simulate=0# to simulate the GRN
+transform=1 # old to new
+Infer=1# to infer the GRN
+simulate=1# to simulate the GRN
 perturb=1# to perturb the GRN (KO/OV)
 
 # Create a working directory
