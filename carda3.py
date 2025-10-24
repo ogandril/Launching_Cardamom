@@ -13,14 +13,14 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3614 # project name
-P=3 #Experiment within project
+D=3617 # project name
+P=1 #Experiment within project
 seq="3591_1" # R script to be launched
 # Time sensitive parameters
 SFT=25 # time scale factor
 CC=20 # cell cycle time:
 f=10 # Stabilizing factor for mRNA (slows down the model)
-Th_int=4 #threshold for interactions 
+Th_int=2 #threshold for interactions 
 
 # Which function should be executed
 transform=1 # old to new
@@ -110,7 +110,7 @@ if perturb:
 	os.system("echo 'simulate_network_KOV'")
 	os.system(f"python simulate_network_KOV.py -i {cwd}/OG{D}/{P} -s full")
 	os.system("echo 'check_KOV_to_sim'")
-	os.system(f"python check_KOV_to_sim.py -i {cwd}/OG{D}/{P} -s full")
+	os.system(f"python check_KOV_to_sim.py -i {cwd}/OG{D}/{P}")
 
 print('My work here is done')
 
