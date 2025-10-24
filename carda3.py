@@ -20,6 +20,7 @@ seq="3591_1" # R script to be launched
 SFT=10 # time scale factor
 CC=20 # cell cycle time:
 f=10 # Stabilizing factor for mRNA (slows down the model)
+Th_int=4 #threshold for interactions 
 
 # Which function should be executed
 transform=1 # old to new
@@ -36,8 +37,15 @@ os.chdir(path_1)
 os.system(f"mkdir {P}")
 os.chdir(f"{cwd}/")
 
-# Copy carda3.py and the R script
+# Define path
 path_2 = (f"{cwd}/OG{D}/{P}")
+path_3 = (f"{cwd}/CardaSC/utils/old_to_new")
+path_4 = (f"{cwd}/CardaSC")
+path_5 = (f"{cwd}/OG{D}/{P}/cardamom")
+path_6 = (f"{cwd}/OG{D}/{P}/Data")
+
+
+# Copy carda3.py and the R script
 os.system("cp  Launching_Cardamom/carda3.py "+path_2)
 os.system(f"cp  res_carda/{seq}.R "+path_2)
 
@@ -50,20 +58,14 @@ os.system("mkdir cardamom")
 # Launch R script to generate entry files
 os.system(f"Rscript --vanilla  {cwd}/res_carda/{seq}.R {SFT} {CC} {P} {D} {f}")
 
-# Move to the Cardasc repository 
-path_3 = f"{cwd}/CardaSC/utils/old_to_new"
-os.chdir(path_3)
-
 if transform:
+	os.chdir(path_3)
 	os.system("echo 'old_to_new'")
 	os.system(f"python convert_old_data_to_ad.py -i {cwd}/OG{D}/{P}")
 	os.system(f"python add_degradations_to_ad.py -i {cwd}/OG{D}/{P}")
 
-# Launch V2 scripts
-path_4 = f"{cwd}/CardaSC"
-os.chdir(path_4)
-
 if Infer:
+	os.chdir(path_4)
 	os.system("echo 'Select DE genes and split cells'")
 	os.system(f"python select_DEgenes_and_split.py -i {cwd}/OG{D}/{P} -s full -c 0 -r 0.6")
 	os.system("echo 'Get kinetic rates'")
@@ -75,10 +77,13 @@ if Infer:
 	os.system("echo 'Infer network to simulate'")
 	os.system(f"python infer_network_simul.py -i {cwd}/OG{D}/{P} -s full")
 
-# Save a csv version of the interaction matrix
-path_5 = (f"{cwd}/OG{D}/{P}/cardamom")
+# Save a csv version of the interaction matrix after applying a threshold
 os.chdir(path_5)
 inter = np.load('inter.npy')
+# Cut off low intensity edges
+inter[abs(inter) < T] = 0
+# Save the resulting matrix
+np.save('inter.npy', inter)
 inter2D=inter[:, :, 0]
 np.savetxt('inter.csv', inter2D, delimiter=",")
 
@@ -91,7 +96,6 @@ if simulate:
 
 if perturb:
 	# Write the genes to perturb.
-	path_6 = (f"{cwd}/OG{D}/{P}/Data")
 	os.chdir(path_6)
 	fichier = open('list_KO.txt', 'w')
 	for arg in sys.argv[1:]:

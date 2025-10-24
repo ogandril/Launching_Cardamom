@@ -6,5 +6,5 @@
 source carda/bin/activate
 module load Programming_Languages/R/latest
 export PYTHONPATH="$(dirname $(which python))/../lib/python3.9/site-packages:$PYTHONPATH"
-python3 Launching_Cardamom/carda3.py
+python3 Launching_Cardamom/carda3.py PCNA
 
