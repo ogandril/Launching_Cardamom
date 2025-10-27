@@ -14,13 +14,13 @@ import sys
 cwd = os.getcwd()
 
 D=3617 # project name
-P=1 #Experiment within project
+P=2 #Experiment within project
 seq="3591_1" # R script to be launched
 # Time sensitive parameters
 SFT=25 # time scale factor
 CC=20 # cell cycle time:
 f=10 # Stabilizing factor for mRNA (slows down the model)
-Th_int=1 #threshold for interactions 
+Th_int=0.5 #threshold for interactions 
 
 # Which function should be executed
 transform=1 # old to new
@@ -44,10 +44,14 @@ path_4 = (f"{cwd}/CardaSC")
 path_5 = (f"{cwd}/OG{D}/{P}/cardamom")
 path_6 = (f"{cwd}/OG{D}/{P}/Data")
 
-
-# Copy carda3.py and the R script
+# Copy various files in the new folder
+# carda3; ce fichier
 os.system("cp  Launching_Cardamom/carda3.py "+path_2)
+# Le script R qui a construit la matrice
 os.system(f"cp  res_carda/{seq}.R "+path_2)
+# Les régalages de base de CARDAMOM
+os.system(f"cp  cardamom_beta/model/base.py "+path_2)
+
 
 # Create cardamom folders
 os.chdir(path_2)
@@ -80,12 +84,23 @@ if Infer:
 # Save a csv version of the interaction matrix after applying a threshold
 os.chdir(path_5)
 inter = np.load('inter.npy')
+inter_t = np.load('inter_t.npy')
 # Cut off low intensity edges
 inter[abs(inter) < Th_int] = 0
+inter_t[abs(inter_t) < Th_int] = 0
 # Save the resulting matrix
 np.save('inter.npy', inter)
+np.save('inter_t.npy', inter_t)
+
+# Save as .csv for R
 inter2D=inter[:, :, 0]
 np.savetxt('inter.csv', inter2D, delimiter=",")
+
+# Same for time-dependent matrix
+for i in range(0, inter_t.shape[0]): 
+	inter2D_t=inter_t[i, :, :, 0]
+	print(inter2D_t.shape)
+	np.savetxt("inter_"+str(i)+".csv", inter2D_t, delimiter=",")
 
 if simulate:	
 	os.chdir(path_4)
