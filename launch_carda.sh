@@ -1,10 +1,11 @@
 #!/bin/bash
-#SBATCH --job-name=3614
+#SBATCH --job-name=3617
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=olivier.gandrillon@ens-lyon.fr
 #SBATCH --export=NONE
 source carda/bin/activate
 module load Programming_Languages/R/latest
 export PYTHONPATH="$(dirname $(which python))/../lib/python3.9/site-packages:$PYTHONPATH"
-python3 Launching_Cardamom/carda3.py PCNA
+python3 Launching_Cardamom/carda3.py $1 $2
+#python3 Launching_Cardamom/carda3.py CYGB
 
