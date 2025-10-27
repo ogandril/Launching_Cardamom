@@ -14,13 +14,13 @@ import sys
 cwd = os.getcwd()
 
 D=3617 # project name
-P=2 #Experiment within project
+P=3 #Experiment within project
 seq="3591_1" # R script to be launched
 # Time sensitive parameters
 SFT=25 # time scale factor
 CC=20 # cell cycle time:
 f=10 # Stabilizing factor for mRNA (slows down the model)
-Th_int=0.5 #threshold for interactions 
+Th_int=0.7 #threshold for interactions 
 
 # Which function should be executed
 transform=1 # old to new
@@ -50,8 +50,7 @@ os.system("cp  Launching_Cardamom/carda3.py "+path_2)
 # Le script R qui a construit la matrice
 os.system(f"cp  res_carda/{seq}.R "+path_2)
 # Les régalages de base de CARDAMOM
-os.system(f"cp  cardamom_beta/model/base.py "+path_2)
-
+os.system(f"cp  CardaSC/cardamom_beta/model/base.py "+path_2)
 
 # Create cardamom folders
 os.chdir(path_2)
@@ -99,7 +98,6 @@ np.savetxt('inter.csv', inter2D, delimiter=",")
 # Same for time-dependent matrix
 for i in range(0, inter_t.shape[0]): 
 	inter2D_t=inter_t[i, :, :, 0]
-	print(inter2D_t.shape)
 	np.savetxt("inter_"+str(i)+".csv", inter2D_t, delimiter=",")
 
 if simulate:	
