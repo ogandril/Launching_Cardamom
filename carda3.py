@@ -69,7 +69,7 @@ if transform:
 	os.system(f"python add_degradations_to_ad.py -i {cwd}/OG{D}/{P}")
 
 if Pre_comp:
-	os.system(f"cp  {cwd}/res_carda/adata_3618.h5ad "+path_6)
+	os.system(f"cp  {cwd}/res_carda/data.h5ad "+path_6)
 
 if Infer:
 	os.chdir(path_4)
