@@ -14,7 +14,7 @@ import sys
 cwd = os.getcwd()
 
 D=3617 # project name
-P=4 #Experiment within project
+P=5 #Experiment within project
 seq="3591_1" # R script to be launched
 # Time sensitive parameters
 SFT=25 # time scale factor
@@ -23,7 +23,8 @@ f=10 # Stabilizing factor for mRNA (slows down the model)
 Th_int=0.8 #threshold for interactions 
 
 # Which function should be executed
-transform=1 # old to new
+transform=0 # old to new
+Pre_comp=1 # If a precomputed anndata is available
 Infer=1# to infer the GRN
 simulate=1# to simulate the GRN
 perturb=1# to perturb the GRN (KO/OV)
@@ -66,6 +67,9 @@ if transform:
 	os.system("echo 'old_to_new'")
 	os.system(f"python convert_old_data_to_ad.py -i {cwd}/OG{D}/{P}")
 	os.system(f"python add_degradations_to_ad.py -i {cwd}/OG{D}/{P}")
+
+if Pre_comp:
+	os.system(f"cp  {cwd}/res_carda/adata_3618.h5ad "+path_6)
 
 if Infer:
 	os.chdir(path_4)
