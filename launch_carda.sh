@@ -7,5 +7,4 @@ source carda/bin/activate
 module load Programming_Languages/R/latest
 export PYTHONPATH="$(dirname $(which python))/../lib/python3.9/site-packages:$PYTHONPATH"
 python3 Launching_Cardamom/carda3.py  $1 $2 $3 $4 $5
-#python3 Launching_Cardamom/carda3.py CYGB H1.0 KPNA2 DLK1 BRCA1
 
