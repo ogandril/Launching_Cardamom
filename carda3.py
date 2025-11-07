@@ -17,7 +17,7 @@ D=3622 # project name
 P=2 #Experiment within project
 seq="3622_1" # R script to be launched
 # Time sensitive parameters
-SFT=25 # time scale factor
+SFT=10 # time scale factor
 CC=20 # cell cycle time:
 f=10 # Stabilizing factor for mRNA (slows down the model)
 Th_int=1.2 #threshold for interactions 
