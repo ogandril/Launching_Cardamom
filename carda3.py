@@ -38,8 +38,12 @@ path_2 = os.path.join(path_1, str(P))
 os.makedirs(path_2, exist_ok=True)
 
 # Define path
-path_3 = (f"{cwd}/CardaSC/utils/old_to_new")
-path_4 = (f"{cwd}/CardaSC")
+path_4 = os.path.join(cwd, 'CardaSC')
+path_3 = os.path.join(path_4, 'utils/old_to_new')
+
+
+#path_3 = (f"{cwd}/CardaSC/utils/old_to_new")
+#path_4 = (f"{cwd}/CardaSC")
 
 path_5 = os.path.join(path_2, 'cardamom')
 path_6 = os.path.join(path_2, 'Data')
