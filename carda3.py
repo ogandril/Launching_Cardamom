@@ -40,17 +40,20 @@ os.makedirs(path_1, exist_ok=True)  # Using os.makedirs is safer than os.system
 #os.chdir(path_1)
 #os.system(f"mkdir {P}")
 #os.chdir(f"{cwd}/")
-
-# Define path
-path_2 = os.path.join(path_1, P)
+path_2 = os.path.join(path_1, str(P))
 os.makedirs(path_2, exist_ok=True)
 
 # Define path
 #path_2 = (f"{cwd}/OG{D}/{P}")
 path_3 = (f"{cwd}/CardaSC/utils/old_to_new")
 path_4 = (f"{cwd}/CardaSC")
-path_5 = (f"{cwd}/OG{D}/{P}/cardamom")
-path_6 = (f"{cwd}/OG{D}/{P}/Data")
+
+path_5 = os.path.join(path_2, cardamom)
+path_6 = os.path.join(path_2, Data)
+
+
+#path_5 = (f"{cwd}/OG{D}/{P}/cardamom")
+#path_6 = (f"{cwd}/OG{D}/{P}/Data")
 
 # Copy various files in the new folder
 # carda3; ce fichier
