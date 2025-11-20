@@ -33,34 +33,26 @@ perturb=1# to perturb the GRN (KO/OV)
 path_1 = os.path.join(cwd, f"OG{D}")
 os.makedirs(path_1, exist_ok=True)  # Using os.makedirs is safer than os.system
 
-#os.system(f"mkdir {cwd}/OG{D}")
-#path_1 = (f"{cwd}/OG{D}")
-
 # Create a working subdirectory
-#os.chdir(path_1)
-#os.system(f"mkdir {P}")
-#os.chdir(f"{cwd}/")
 path_2 = os.path.join(path_1, str(P))
 os.makedirs(path_2, exist_ok=True)
 
 # Define path
-#path_2 = (f"{cwd}/OG{D}/{P}")
 path_3 = (f"{cwd}/CardaSC/utils/old_to_new")
 path_4 = (f"{cwd}/CardaSC")
 
-path_5 = os.path.join(path_2, cardamom)
-path_6 = os.path.join(path_2, Data)
-
+path_5 = os.path.join(path_2, 'cardamom')
+path_6 = os.path.join(path_2, 'Data')
 
 #path_5 = (f"{cwd}/OG{D}/{P}/cardamom")
 #path_6 = (f"{cwd}/OG{D}/{P}/Data")
 
 # Copy various files in the new folder
-# carda3; ce fichier
+# carda3; this file containing hyperparameters
 os.system("cp  Launching_Cardamom/carda3.py "+path_2)
-# Le script R qui a construit la matrice
+# The R script that was used for building the matrix
 os.system(f"cp  res_carda/{seq}.R "+path_2)
-# Les régalages de base de CARDAMOM
+# The CARDAMOM basic parameters
 os.system(f"cp  CardaSC/cardamom_beta/model/base.py "+path_2)
 
 # Create cardamom folders
