@@ -13,8 +13,8 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3623 # project name
-P=6 #Experiment within project
+D=3624 # project name
+P=1 #Experiment within project
 seq="3622_1" # R script to be launched
 # Time sensitive parameters
 SFT=10 # time scale factor
@@ -37,14 +37,9 @@ os.makedirs(path_1, exist_ok=True)  # Using os.makedirs is safer than os.system
 path_2 = os.path.join(path_1, str(P))
 os.makedirs(path_2, exist_ok=True)
 
-# Define path
+# Define path and create folders
 path_4 = os.path.join(cwd, 'CardaSC')
 path_3 = os.path.join(path_4, 'utils/old_to_new')
-
-
-#path_3 = (f"{cwd}/CardaSC/utils/old_to_new")
-#path_4 = (f"{cwd}/CardaSC")
-
 path_5 = os.path.join(path_2, 'cardamom')
 path_6 = os.path.join(path_2, 'Data')
 
@@ -55,11 +50,6 @@ os.system("cp  Launching_Cardamom/carda3.py "+path_2)
 os.system(f"cp  res_carda/{seq}.R "+path_2)
 # The CARDAMOM basic parameters
 os.system(f"cp  CardaSC/cardamom_beta/model/base.py "+path_2)
-
-# Create cardamom folders
-os.chdir(path_2)
-os.system("mkdir Data")
-os.system("mkdir cardamom")
 
 # Launch R script to generate entry files
 os.system(f"Rscript --vanilla  {cwd}/res_carda/{seq}.R {SFT} {CC} {P} {D} {f}")
