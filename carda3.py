@@ -14,7 +14,7 @@ import sys
 cwd = os.getcwd()
 
 D=3622 # project name
-P=5 #Experiment within project
+P=6 #Experiment within project
 seq="3622_1" # R script to be launched
 # Time sensitive parameters
 SFT=10 # time scale factor
@@ -30,8 +30,11 @@ simulate=1# to simulate the GRN
 perturb=1# to perturb the GRN (KO/OV)
 
 # Create a working directory
-os.system(f"mkdir {cwd}/OG{D}")
-path_1 = (f"{cwd}/OG{D}")
+path1 = os.path.join(cwd, f"OG{D}")
+os.makedirs(path1, exist_ok=True)  # Using os.makedirs is safer than os.system
+
+#os.system(f"mkdir {cwd}/OG{D}")
+#path_1 = (f"{cwd}/OG{D}")
 
 # Create a working subdirectory
 os.chdir(path_1)
@@ -39,7 +42,8 @@ os.system(f"mkdir {P}")
 os.chdir(f"{cwd}/")
 
 # Define path
-path_2 = (f"{cwd}/OG{D}/{P}")
+path2 = os.path.join(path1, P)
+#path_2 = (f"{cwd}/OG{D}/{P}")
 path_3 = (f"{cwd}/CardaSC/utils/old_to_new")
 path_4 = (f"{cwd}/CardaSC")
 path_5 = (f"{cwd}/OG{D}/{P}/cardamom")
@@ -56,7 +60,6 @@ os.system(f"cp  CardaSC/cardamom_beta/model/base.py "+path_2)
 # Create cardamom folders
 os.chdir(path_2)
 os.system("mkdir Data")
-os.system("mkdir Rates")
 os.system("mkdir cardamom")
 
 # Launch R script to generate entry files
