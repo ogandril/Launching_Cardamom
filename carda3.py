@@ -44,9 +44,6 @@ path_4 = (f"{cwd}/CardaSC")
 path_5 = os.path.join(path_2, 'cardamom')
 path_6 = os.path.join(path_2, 'Data')
 
-#path_5 = (f"{cwd}/OG{D}/{P}/cardamom")
-#path_6 = (f"{cwd}/OG{D}/{P}/Data")
-
 # Copy various files in the new folder
 # carda3; this file containing hyperparameters
 os.system("cp  Launching_Cardamom/carda3.py "+path_2)
