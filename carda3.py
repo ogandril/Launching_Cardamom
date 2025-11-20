@@ -41,7 +41,9 @@ os.makedirs(path_2, exist_ok=True)
 path_4 = os.path.join(cwd, 'CardaSC')
 path_3 = os.path.join(path_4, 'utils/old_to_new')
 path_5 = os.path.join(path_2, 'cardamom')
+os.makedirs(path_5, exist_ok=True)  # Using os.makedirs is safer than os.system
 path_6 = os.path.join(path_2, 'Data')
+os.makedirs(path_6, exist_ok=True)  # Using os.makedirs is safer than os.system
 
 # Copy various files in the new folder
 # carda3; this file containing hyperparameters
