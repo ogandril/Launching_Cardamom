@@ -30,7 +30,7 @@ simulate=1# to simulate the GRN
 perturb=1# to perturb the GRN (KO/OV)
 
 # Create a working directory
-path1 = os.path.join(cwd, f"OG{D}")
+path_1 = os.path.join(cwd, f"OG{D}")
 os.makedirs(path1, exist_ok=True)  # Using os.makedirs is safer than os.system
 
 #os.system(f"mkdir {cwd}/OG{D}")
@@ -42,7 +42,7 @@ os.system(f"mkdir {P}")
 os.chdir(f"{cwd}/")
 
 # Define path
-path2 = os.path.join(path1, P)
+path_2 = os.path.join(path_1, P)
 #path_2 = (f"{cwd}/OG{D}/{P}")
 path_3 = (f"{cwd}/CardaSC/utils/old_to_new")
 path_4 = (f"{cwd}/CardaSC")
