@@ -14,7 +14,7 @@ import sys
 cwd = os.getcwd()
 
 D=3624 # project name
-P=2 #Experiment within project
+P=3 #Experiment within project
 seq="3622_1" # R script to be launched
 # Time sensitive parameters
 SFT=10 # time scale factor
