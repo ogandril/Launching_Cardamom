@@ -44,6 +44,9 @@ path_5 = os.path.join(path_2, 'cardamom')
 os.makedirs(path_5, exist_ok=True)  # Using os.makedirs is safer than os.system
 path_6 = os.path.join(path_2, 'Data')
 os.makedirs(path_6, exist_ok=True)  # Using os.makedirs is safer than os.system
+path_7 = os.path.join(path_2, 'halflife')
+os.makedirs(path_6, exist_ok=True)  # Using os.makedirs is safer than os.system
+
 
 # Copy various files in the new folder
 # carda3; this file containing hyperparameters
@@ -63,6 +66,7 @@ if transform:
 
 if Pre_comp:
 	os.system(f"cp  {cwd}/res_carda/data.h5ad "+path_6)
+	os.system(f"cp  {cwd}/res_carda/table_halflife_mamalian.csv "+path_7)
 
 if Infer:
 	os.chdir(path_4)
