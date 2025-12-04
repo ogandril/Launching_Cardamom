@@ -60,7 +60,7 @@ if transform:
 	os.chdir(path_3)
 	# Launch R script to generate entry files
 	os.system("echo 'create data real'")
-	os.system(f"Rscript --vanilla  {cwd}/res_carda/{seq}.R {SFT} {CC} {P} {D} {f}")
+	os.system(f"Rscript --vanilla  {cwd}/res_carda/{seq} {SFT} {CC} {P} {D} {f}")
 	os.system("echo 'old_to_new'")
 	os.system(f"python convert_old_data_to_ad.py -i {cwd}/OG{D}/{P}")
 	os.system(f"python add_degradations_to_ad.py -i {cwd}/OG{D}/{P}")
