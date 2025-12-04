@@ -45,7 +45,7 @@ os.makedirs(path_5, exist_ok=True)  # Using os.makedirs is safer than os.system
 path_6 = os.path.join(path_2, 'Data')
 os.makedirs(path_6, exist_ok=True)  # Using os.makedirs is safer than os.system
 path_7 = os.path.join(path_2, 'halflife')
-os.makedirs(path_6, exist_ok=True)  # Using os.makedirs is safer than os.system
+os.makedirs(path_7, exist_ok=True)  # Using os.makedirs is safer than os.system
 
 
 # Copy various files in the new folder
