@@ -58,11 +58,13 @@ os.system(f"cp  CardaSC/cardamom_beta/model/base.py "+path_2)
 
 if transform:
 	os.chdir(path_3)
+	os.system("create data real'")
+	os.system(f"Rscript --vanilla  {cwd}/res_carda/{seq}.R {SFT} {CC} {P} {D} {f}")
 	os.system("echo 'old_to_new'")
 	os.system(f"python convert_old_data_to_ad.py -i {cwd}/OG{D}/{P}")
 	os.system(f"python add_degradations_to_ad.py -i {cwd}/OG{D}/{P}")
 	# Launch R script to generate entry files
-	os.system(f"Rscript --vanilla  {cwd}/res_carda/{seq}.R {SFT} {CC} {P} {D} {f}")
+	
 
 if Pre_comp:
 	os.system(f"cp  {cwd}/res_carda/data.h5ad "+path_6)
