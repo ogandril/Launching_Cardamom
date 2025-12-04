@@ -13,18 +13,18 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3626 # project name
-P=1 #Experiment within project
-seq="3622_1" # R script to be launched
+D=3627 # project name
+P=2 #Experiment within project
+seq="3627_2.r" # R script to be launched
 # Time sensitive parameters
-SFT=10 # time scale factor
+SFT=12.5 # time scale factor
 CC=20 # cell cycle time:
 f=10 # Stabilizing factor for mRNA (slows down the model)
 Th_int=1.6 #threshold for interactions 
 
 # Which function should be executed
-transform=0 # old to new
-Pre_comp=1 # If a precomputed anndata is available
+transform=1 # old to new
+Pre_comp=0 # If a precomputed anndata is available
 Infer=1# to infer the GRN
 simulate=1# to simulate the GRN
 perturb=1# to perturb the GRN (KO/OV)
@@ -58,12 +58,12 @@ os.system(f"cp  CardaSC/cardamom_beta/model/base.py "+path_2)
 
 if transform:
 	os.chdir(path_3)
-	os.system("create data real'")
+	# Launch R script to generate entry files
+	os.system("echo 'create data real'")
 	os.system(f"Rscript --vanilla  {cwd}/res_carda/{seq}.R {SFT} {CC} {P} {D} {f}")
 	os.system("echo 'old_to_new'")
 	os.system(f"python convert_old_data_to_ad.py -i {cwd}/OG{D}/{P}")
 	os.system(f"python add_degradations_to_ad.py -i {cwd}/OG{D}/{P}")
-	# Launch R script to generate entry files
 	
 
 if Pre_comp:
