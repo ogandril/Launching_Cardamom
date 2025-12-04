@@ -52,7 +52,7 @@ os.makedirs(path_7, exist_ok=True)  # Using os.makedirs is safer than os.system
 # carda3; this file containing hyperparameters
 os.system("cp  Launching_Cardamom/carda3.py "+path_2)
 # The R script that was used for building the matrix
-os.system(f"cp  res_carda/{seq}.R "+path_2)
+os.system(f"cp  res_carda/{seq} "+path_2)
 # The CARDAMOM basic parameters
 os.system(f"cp  CardaSC/cardamom_beta/model/base.py "+path_2)
 
