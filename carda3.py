@@ -15,7 +15,7 @@ cwd = os.getcwd()
 
 D=3627 # project name
 P=2 #Experiment within project
-seq="3627_2.r" # R script to be launched
+seq="3627_2.R" # R script to be launched
 # Time sensitive parameters
 SFT=12.5 # time scale factor
 CC=20 # cell cycle time:
@@ -46,6 +46,8 @@ path_6 = os.path.join(path_2, 'Data')
 os.makedirs(path_6, exist_ok=True)  # Using os.makedirs is safer than os.system
 path_7 = os.path.join(path_2, 'halflife')
 os.makedirs(path_7, exist_ok=True)  # Using os.makedirs is safer than os.system
+path_8 = os.path.join(path_2, 'Rates')
+os.makedirs(path_8, exist_ok=True)  # Using os.makedirs is safer than os.system
 
 
 # Copy various files in the new folder
