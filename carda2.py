@@ -11,9 +11,9 @@ from harissa.utils import build_pos, plot_network
 # Hyperparameters
 # Pathways and files
 cwd = os.getcwd()
-D=3552 # project name
+D=3634 # project name
 P=1 #Experiment within project
-seq="3552_7" # R script to be launched
+seq="3627_2.R" # R script to be launched
 # Time sensitive parameters
 SFT=4 # time scale factor
 CC=20 # cell cycle time:
@@ -22,7 +22,7 @@ f=10 # Stabilizing factor for mRNA (slow down the model)
 sf=10 # scaling factor: in order to provide a more comprehensive representation of the network's dynamics# amplify the scaling factor applied to the network's edges.
 T=4 #threshold for interactions 
 rval=2.5 #transfer the basal regulation in the diagonal of the interaction matrix with a given intensity
-# Visulaization parameters
+# Visualization parameters
 percent_valid=0.5 # percentage of KD values to be considered as valid
 m=0 #Maximum value forced into the KD table
 # Modifying the GRN
@@ -34,8 +34,8 @@ Gene_to_overexpress='HMGB2' #name of the gene to overexpress
 # Which function should be executed
 Infer=1# to infer the GRN
 Simulate=1# to simulate the GRN
-Visualize=1 # to visualize some output
-Kanto=1 # to compute Kantorovich distances
+Visualize=0 # to visualize some output
+Kanto=0 # to compute Kantorovich distances
 Draw=0 #to draw the GRN
 
 # Create a working directory
@@ -56,7 +56,7 @@ os.system("mkdir Rates")
 os.system("mkdir cardamom")
 
 # Launch R script to generate entry files
-os.system("Rscript --vanilla  "+str(cwd)+"/res_carda/"+str(seq)+".R "+str(SFT)+" "+str(CC)+" "+str(P)+" "+str(D)+" "+str(f))
+os.system("Rscript --vanilla  "+str(cwd)+"/res_carda/"+str(seq)+str(SFT)+" "+str(CC)+" "+str(P)+" "+str(D)+" "+str(f))
 
 # Move to the central cardamom directory (cwd)
 os.chdir("../")
@@ -75,27 +75,6 @@ kmin = np.load('kmin.npy')
 inter_t=np.load('inter_t.npy')
 basal_t=np.load('basal_t.npy')
 
-# Modify interactions values
-fi=sf*inter
-basal = sf*basal
-fi_t=sf*inter_t
-
-# Cut off low intensity edges
-fi[abs(fi) < T] = 0
-# Save the resulting matrix
-np.save('inter.npy', fi)
-np.savetxt('inter.csv', fi, delimiter=",")
-
-np.save('basal.npy', basal)
-
-# Same for time-dependent matrix
-for i in range(0, len(fi_t)):	
-		fi = np.load('inter_{}.npy'.format(i))	
-		fi=fi*sf
-		fi[abs(fi) < T] = 0
-		np.save('inter_{}.npy'.format(i), fi)
-		np.savetxt('inter_{}.csv'.format(i), fi, delimiter=",")
-
 # Add transfert 
 os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/Data")
 data_real = np.loadtxt('panel_real.txt', dtype=float, delimiter='\t')[1:, 1:].T
@@ -108,9 +87,27 @@ basal[:] = rval/G * basal_t[-1]
 
 os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/cardamom")
 np.save('basal.npy', basal)
-np.save('basal2.npy', basal)
 np.save('inter.npy', inter)
 
+# Modify interactions values
+fi=sf*inter
+basal = sf*basal
+fi_t=sf*inter_t
+
+# Cut off low intensity edges
+fi[abs(fi) < T] = 0
+# Save the resulting matrix
+np.save('inter.npy', fi)
+np.savetxt('inter.csv', fi, delimiter=",")
+np.save('basal.npy', basal)
+
+# Same for time-dependent matrix
+for i in range(0, len(fi_t)):	
+		fi = np.load('inter_{}.npy'.format(i))	
+		fi=fi*sf
+		fi[abs(fi) < T] = 0
+		np.save('inter_{}.npy'.format(i), fi)
+		np.savetxt('inter_{}.csv'.format(i), fi, delimiter=",")
 
 # KO
 if KO:
