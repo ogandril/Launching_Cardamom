@@ -13,8 +13,8 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3627 # project name
-P=3 #Experiment within project
+D=3635 # project name
+P=1 #Experiment within project
 seq="3627_2.R" # R script to be launched
 # Time sensitive parameters
 SFT=12.5 # time scale factor
@@ -27,7 +27,7 @@ transform=0 # old to new
 Pre_comp=1 # If a precomputed anndata is available
 Infer=1# to infer the GRN
 simulate=1# to simulate the GRN
-perturb=1# to perturb the GRN (KO/OV)
+perturb=0# to perturb the GRN (KO/OV)
 
 # Create a working directory
 path_1 = os.path.join(cwd, f"OG{D}")
