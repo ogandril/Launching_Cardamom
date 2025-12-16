@@ -12,7 +12,7 @@ from harissa.utils import build_pos, plot_network
 # Pathways and files
 cwd = os.getcwd()
 D=3634 # project name
-P=2 #Experiment within project
+P=3 #Experiment within project
 seq="3634_1.R" # R script to be launched
 # Time sensitive parameters
 SFT=4 # time scale factor
@@ -76,15 +76,15 @@ kmin = np.load('kmin.npy')
 inter_t=np.load('inter_t.npy')
 basal_t=np.load('basal_t.npy')
 
-# Add transfert 
-os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/Data")
-data_real = np.loadtxt('panel_real.txt', dtype=float, delimiter='\t')[1:, 1:].T
-C, G = data_real.shape
+# # Add transfert 
+# os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/Data")
+# data_real = np.loadtxt('panel_real.txt', dtype=float, delimiter='\t')[1:, 1:].T
+# C, G = data_real.shape
 
-inter[:, :] = inter_t[-1][:, :] + (1 - rval/G) * np.diag(basal_t[-1])
-inter[1:, 1:] /= (1 - .6 * rval/G)
-inter -= np.diag(np.diag(inter)) * .6 * rval/G
-basal[:] = rval/G * basal_t[-1]
+# inter[:, :] = inter_t[-1][:, :] + (1 - rval/G) * np.diag(basal_t[-1])
+# inter[1:, 1:] /= (1 - .6 * rval/G)
+# inter -= np.diag(np.diag(inter)) * .6 * rval/G
+# basal[:] = rval/G * basal_t[-1]
 
 os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/cardamom")
 np.save('basal.npy', basal)
