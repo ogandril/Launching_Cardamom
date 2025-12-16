@@ -12,7 +12,7 @@ from harissa.utils import build_pos, plot_network
 # Pathways and files
 cwd = os.getcwd()
 D=3634 # project name
-P=3 #Experiment within project
+P=4 #Experiment within project
 seq="3634_1.R" # R script to be launched
 # Time sensitive parameters
 SFT=4 # time scale factor
@@ -20,15 +20,15 @@ CC=20 # cell cycle time:
 f=10 # Stabilizing factor for mRNA (slow down the model)
 # Modifying interaction values
 sf=10 # scaling factor: in order to provide a more comprehensive representation of the network's dynamics# amplify the scaling factor applied to the network's edges.
-T=2 #threshold for interactions 
-rval=0 #transfer the basal regulation in the diagonal of the interaction matrix with a given intensity
+T=3 #threshold for interactions 
+rval=-2 #transfer the basal regulation in the diagonal of the interaction matrix with a given intensity
 # Visualization parameters
 percent_valid=0.5 # percentage of KD values to be considered as valid
 m=0 #Maximum value forced into the KD table
 # Modifying the GRN
 KO=0 # 1 if a KO should be made
 Gene_to_KO='CHGA' #name of the gene to knock down
-Overexpression=1  # If a gene should be overexpressed
+Overexpression=0  # If a gene should be overexpressed
 Gene_to_overexpress='HMGB2' #name of the gene to overexpress
 
 # Which function should be executed
@@ -76,15 +76,15 @@ kmin = np.load('kmin.npy')
 inter_t=np.load('inter_t.npy')
 basal_t=np.load('basal_t.npy')
 
-# # Add transfert 
-# os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/Data")
-# data_real = np.loadtxt('panel_real.txt', dtype=float, delimiter='\t')[1:, 1:].T
-# C, G = data_real.shape
+# Add transfert 
+os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/Data")
+data_real = np.loadtxt('panel_real.txt', dtype=float, delimiter='\t')[1:, 1:].T
+C, G = data_real.shape
 
-# inter[:, :] = inter_t[-1][:, :] + (1 - rval/G) * np.diag(basal_t[-1])
-# inter[1:, 1:] /= (1 - .6 * rval/G)
-# inter -= np.diag(np.diag(inter)) * .6 * rval/G
-# basal[:] = rval/G * basal_t[-1]
+inter[:, :] = inter_t[-1][:, :] + (1 - rval/G) * np.diag(basal_t[-1])
+inter[1:, 1:] /= (1 - .6 * rval/G)
+inter -= np.diag(np.diag(inter)) * .6 * rval/G
+basal[:] = rval/G * basal_t[-1]
 
 os.chdir(str(cwd)+"/OG"+str(D)+"/"+str(P)+"/cardamom")
 np.save('basal.npy', basal)
