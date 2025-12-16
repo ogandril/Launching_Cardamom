@@ -13,7 +13,7 @@ from harissa.utils import build_pos, plot_network
 cwd = os.getcwd()
 D=3634 # project name
 P=1 #Experiment within project
-seq="3627_2.R" # R script to be launched
+seq="3634_1.R" # R script to be launched
 # Time sensitive parameters
 SFT=4 # time scale factor
 CC=20 # cell cycle time:
