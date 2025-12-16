@@ -56,10 +56,11 @@ os.system("mkdir Rates")
 os.system("mkdir cardamom")
 
 # Launch R script to generate entry files
-os.system("Rscript --vanilla  "+str(cwd)+"/res_carda/"+str(seq)+str(SFT)+" "+str(CC)+" "+str(P)+" "+str(D)+" "+str(f))
+os.system("Rscript --vanilla  "+str(cwd)+"/res_carda/"+str(seq)+" "+str(SFT)+" "+str(CC)+" "+str(P)+" "+str(D)+" "+str(f))
 
 # Move to the central cardamom directory (cwd)
-os.chdir("../")
+path_1 = os.path.join(cwd, 'cardamom')
+os.chdir(path_1)
 
 # Infer GRN
 if Infer:
