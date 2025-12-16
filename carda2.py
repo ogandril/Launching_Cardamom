@@ -12,7 +12,7 @@ from harissa.utils import build_pos, plot_network
 # Pathways and files
 cwd = os.getcwd()
 D=3634 # project name
-P=1 #Experiment within project
+P=2 #Experiment within project
 seq="3634_1.R" # R script to be launched
 # Time sensitive parameters
 SFT=4 # time scale factor
@@ -20,8 +20,8 @@ CC=20 # cell cycle time:
 f=10 # Stabilizing factor for mRNA (slow down the model)
 # Modifying interaction values
 sf=10 # scaling factor: in order to provide a more comprehensive representation of the network's dynamics# amplify the scaling factor applied to the network's edges.
-T=4 #threshold for interactions 
-rval=2.5 #transfer the basal regulation in the diagonal of the interaction matrix with a given intensity
+T=2 #threshold for interactions 
+rval=0 #transfer the basal regulation in the diagonal of the interaction matrix with a given intensity
 # Visualization parameters
 percent_valid=0.5 # percentage of KD values to be considered as valid
 m=0 #Maximum value forced into the KD table
@@ -34,7 +34,7 @@ Gene_to_overexpress='HMGB2' #name of the gene to overexpress
 # Which function should be executed
 Infer=1# to infer the GRN
 Simulate=1# to simulate the GRN
-Visualize=0 # to visualize some output
+Visualize=1 # to visualize some output
 Kanto=0 # to compute Kantorovich distances
 Draw=0 #to draw the GRN
 
