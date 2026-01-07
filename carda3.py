@@ -13,9 +13,9 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3646 # project name
+D=3649 # project name
 P=1 #Experiment within project
-seq="3627_2.R" # R script to be launched
+seq="3622_1" # R script to be launched
 # Time sensitive parameters
 SFT=12.5 # time scale factor
 CC=20 # cell cycle time:
@@ -27,7 +27,7 @@ transform=0 # old to new
 Pre_comp=1 # If a precomputed anndata is available
 Infer=1# to infer the GRN
 simulate=1# to simulate the GRN
-perturb=0# to perturb the GRN (KO/OV)
+perturb=1# to perturb the GRN (KO/OV)
 
 # Create a working directory
 path_1 = os.path.join(cwd, f"OG{D}")
@@ -116,13 +116,11 @@ if perturb:
 	# Write the genes to perturb.
 	os.chdir(path_6)
 	fichier = open('KO_OV_list.txt', 'w')
+	fichier.write('KO\tOV\n')
 	for arg in sys.argv[1:]:
-		fichier.write(str(arg+"\n"))
+		fichier.write(str(arg+"\t0\n"))
+		fichier.write("0\t"+str(arg+"\n"))
 	fichier.close()
-	# fichier = open('list_OV.txt', 'w')
-	# for arg in sys.argv[1:]:
-	# 	fichier.write(str(arg+"\n"))
-	# fichier.close()
 	# Excecute the perturbation
 	os.chdir(path_4)
 	os.system("echo 'simulate_network_KOV'")
