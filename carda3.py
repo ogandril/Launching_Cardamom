@@ -126,7 +126,7 @@ if perturb:
 	os.system("echo 'simulate_network_KOV'")
 	os.system(f"python simulate_network_KOV.py -i {cwd}/OG{D}/{P} -s full")
 	os.system("echo 'check_KOV_to_sim'")
-	os.system(f"python check_KOV_to_sim.py -i {cwd}/OG{D}/{P}")
+	os.system(f"python check_KOV_to_sim.py -i {cwd}/OG{D}/{P} -s full")
 
 print('My work here is done')
 
