@@ -13,7 +13,7 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3658# project name
+D=3661# project name
 P=1 #Experiment within project
 seq="3622_1.R" # R script to be launched
 # Time sensitive parameters
@@ -117,7 +117,9 @@ if perturb:
 	os.chdir(path_6)
 	fichier = open('KO_OV_list.txt', 'w')
 	fichier.write('KO\tOV\n')
-	fichier.write('STMN4\tCENPF\n')
+	for arg in sys.argv[1:]:
+		fichier.write(str(arg+"\t0\n"))
+		fichier.write("0\t"+str(arg+"\n"))
 	fichier.close()
 	# Excecute the perturbation
 	os.chdir(path_4)
