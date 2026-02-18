@@ -14,7 +14,7 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3679 # project name
+D='3679_inf' # project name
 P=1 #Experiment within project
 seq='3679_7.R' # R script to be launched
 # Time sensitive parameters
