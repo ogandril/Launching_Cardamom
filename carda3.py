@@ -2,6 +2,7 @@
 # create a new directory for each parameter combination
 # Still requires specific R script at that stage 
 # Start from /pbs/home/o/ogandril/
+# From OG3637
 
 import os
 import numpy as np
@@ -13,9 +14,9 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3661# project name
+D=3679 # project name
 P=1 #Experiment within project
-seq="3622_1.R" # R script to be launched
+seq='3679_7.R' # R script to be launched
 # Time sensitive parameters
 SFT=12.5 # time scale factor
 CC=20 # cell cycle time:
@@ -23,11 +24,11 @@ f=10 # Stabilizing factor for mRNA (slows down the model)
 Th_int=2.5 #threshold for interactions 
 
 # Which function should be executed
-transform=0 # old to new
-Pre_comp=1 # If a precomputed anndata is available
+transform=1 # old to new
+Pre_comp=0 # If a precomputed anndata is available
 Infer=1# to infer the GRN
 simulate=1# to simulate the GRN
-perturb=1# to perturb the GRN (KO/OV)
+perturb=0# to perturb the GRN (KO/OV)
 
 # Create a working directory
 path_1 = os.path.join(cwd, f"OG{D}")
@@ -115,18 +116,20 @@ if simulate:
 if perturb:
 	# Write the genes to perturb.
 	os.chdir(path_6)
-	fichier = open('KO_OV_list.txt', 'w')
-	fichier.write('KO\tOV\n')
+	fichier = open('list_KO.txt', 'w')
 	for arg in sys.argv[1:]:
-		fichier.write(str(arg+"\t0\n"))
-		fichier.write("0\t"+str(arg+"\n"))
+		fichier.write(str(arg+"\n"))
+	fichier.close()
+	fichier = open('list_OV.txt', 'w')
+	for arg in sys.argv[1:]:
+		fichier.write(str(arg+"\n"))
 	fichier.close()
 	# Excecute the perturbation
 	os.chdir(path_4)
 	os.system("echo 'simulate_network_KOV'")
 	os.system(f"python simulate_network_KOV.py -i {cwd}/OG{D}/{P} -s full")
 	os.system("echo 'check_KOV_to_sim'")
-	os.system(f"python check_KOV_to_sim.py -i {cwd}/OG{D}/{P} -s full")
+	os.system(f"python check_KOV_to_sim.py -i {cwd}/OG{D}/{P}")
 
 print('My work here is done')
 
