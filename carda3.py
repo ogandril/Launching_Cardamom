@@ -13,9 +13,9 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3684# project name
+D=3685# project name
 P=1 #Experiment within project
-seq="3679_7.R" # R script to be launched
+seq="3685_9.R" # R script to be launched
 # Time sensitive parameters
 SFT=12.5 # time scale factor
 CC=20 # cell cycle time:
@@ -23,10 +23,10 @@ f=10 # Stabilizing factor for mRNA (slows down the model)
 Th_int=2.5 #threshold for interactions 
 
 # Which function should be executed
-transform=0 # old to new
-Pre_comp=1 # If a precomputed anndata is available
-Infer=1# to infer the GRN
-simulate=1# to simulate the GRN
+transform=1 # old to new
+Pre_comp=0 # If a precomputed anndata is available
+Infer=0# to infer the GRN
+simulate=0# to simulate the GRN
 perturb=0# to perturb the GRN (KO/OV)
 
 # Create a working directory
