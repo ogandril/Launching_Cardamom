@@ -13,9 +13,9 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3685# project name
+D=3687# project name
 P=1 #Experiment within project
-seq="3685_9.R" # R script to be launched
+seq="3622_1" # R script to be launched
 # Time sensitive parameters
 SFT=12.5 # time scale factor
 CC=20 # cell cycle time:
@@ -27,7 +27,7 @@ transform=0 # old to new
 Pre_comp=1 # If a precomputed anndata is available
 Infer=1# to infer the GRN
 simulate=1# to simulate the GRN
-perturb=0# to perturb the GRN (KO/OV)
+perturb=1# to perturb the GRN (KO/OV)
 
 # Create a working directory
 path_1 = os.path.join(cwd, f"OG{D}")
@@ -49,7 +49,6 @@ os.makedirs(path_7, exist_ok=True)  # Using os.makedirs is safer than os.system
 path_8 = os.path.join(path_2, 'Rates')
 os.makedirs(path_8, exist_ok=True)  # Using os.makedirs is safer than os.system
 
-
 # Copy various files in the new folder
 # carda3; this file containing hyperparameters
 os.system("cp  Launching_Cardamom/carda3.py "+path_2)
@@ -67,7 +66,6 @@ if transform:
 	os.system(f"python convert_old_data_to_ad.py -i {cwd}/OG{D}/{P}")
 	os.system(f"python add_degradations_to_ad.py -i {cwd}/OG{D}/{P}")
 	
-
 if Pre_comp:
 	os.system(f"cp  {cwd}/res_carda/data.h5ad "+path_6)
 	os.system(f"cp  {cwd}/res_carda/table_halflife_mamalian.csv "+path_7)
@@ -88,13 +86,11 @@ if Infer:
 # Save a csv version of the interaction matrix after applying a threshold
 os.chdir(path_5)
 inter = np.load('inter.npy')
-inter_t = np.load('inter_t.npy')
 # Cut off low intensity edges
 inter[abs(inter) < Th_int] = 0
 inter_t[abs(inter_t) < Th_int] = 0
 # Save the resulting matrix
 np.save('inter.npy', inter)
-np.save('inter_t.npy', inter_t)
 
 # Save as .csv for R
 inter2D=inter[:, :, 0]
