@@ -76,6 +76,8 @@ if Infer:
 	os.system(f"python select_DEgenes_and_split.py -i {cwd}/OG{D}/{P} -s full -c 0 -r 0.6")
 	os.system("echo 'Get kinetic rates'")
 	os.system(f"python get_kinetic_rates.py -i {cwd}/OG{D}/{P} -s full")
+	os.system("echo 'read depth correction'")
+	os.system(f"python infer_rd.py -i {cwd}/OG{D}/{P} -s full")
 	os.system("echo 'infer_mixture'")
 	os.system(f"python infer_mixture.py -i {cwd}/OG{D}/{P} -s full")
 	os.system("echo 'Infer network structure'")
