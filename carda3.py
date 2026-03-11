@@ -90,18 +90,12 @@ os.chdir(path_5)
 inter = np.load('inter.npy')
 # Cut off low intensity edges
 inter[abs(inter) < Th_int] = 0
-inter_t[abs(inter_t) < Th_int] = 0
 # Save the resulting matrix
 np.save('inter.npy', inter)
 
 # Save as .csv for R
 inter2D=inter[:, :, 0]
 np.savetxt('inter.csv', inter2D, delimiter=",")
-
-# Same for time-dependent matrix
-for i in range(0, inter_t.shape[0]): 
-	inter2D_t=inter_t[i, :, :, 0]
-	np.savetxt("inter_"+str(i)+".csv", inter2D_t, delimiter=",")
 
 if simulate:	
 	os.chdir(path_4)
