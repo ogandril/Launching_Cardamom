@@ -68,12 +68,13 @@ if transform:
 	
 if Pre_comp:
 	os.system(f"cp  {cwd}/res_carda/data.h5ad "+path_6)
+	os.system(f"cp  {cwd}/res_carda/data_full.h5ad "+path_6)
 	os.system(f"cp  {cwd}/res_carda/table_halflife_mamalian.csv "+path_7)
 
 if Infer:
 	os.chdir(path_4)
-	os.system("echo 'Select DE genes and split cells'")
-	os.system(f"python select_DEgenes_and_split.py -i {cwd}/OG{D}/{P} -s full -c 0 -r 0.6")
+	#os.system("echo 'Select DE genes and split cells'")
+	#os.system(f"python select_DEgenes_and_split.py -i {cwd}/OG{D}/{P} -s full -c 0 -r 0.6")
 	os.system("echo 'Get kinetic rates'")
 	os.system(f"python get_kinetic_rates.py -i {cwd}/OG{D}/{P} -s full")
 	os.system("echo 'infer_mixture'")
