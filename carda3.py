@@ -15,7 +15,7 @@ cwd = os.getcwd()
 
 D=3690# project name
 P=1 #Experiment within project
-seq="3622_1" # R script to be launched
+# seq="3622_1" # R script to be launched
 # Time sensitive parameters
 SFT=12.5 # time scale factor
 CC=20 # cell cycle time:
@@ -53,7 +53,7 @@ os.makedirs(path_8, exist_ok=True)  # Using os.makedirs is safer than os.system
 # carda3; this file containing hyperparameters
 os.system("cp  Launching_Cardamom/carda3.py "+path_2)
 # The R script that was used for building the matrix
-os.system(f"cp  res_carda/{seq} "+path_2)
+# os.system(f"cp  res_carda/{seq} "+path_2)
 # The CARDAMOM basic parameters
 os.system(f"cp  CardaSC/cardamom_beta/model/base.py "+path_2)
 
@@ -76,8 +76,6 @@ if Infer:
 	os.system(f"python select_DEgenes_and_split.py -i {cwd}/OG{D}/{P} -s full -c 0 -r 0.6")
 	os.system("echo 'Get kinetic rates'")
 	os.system(f"python get_kinetic_rates.py -i {cwd}/OG{D}/{P} -s full")
-	os.system("echo 'read depth correction'")
-	os.system(f"python infer_rd.py -i {cwd}/OG{D}/{P} -s full")
 	os.system("echo 'infer_mixture'")
 	os.system(f"python infer_mixture.py -i {cwd}/OG{D}/{P} -s full")
 	os.system("echo 'Infer network structure'")
