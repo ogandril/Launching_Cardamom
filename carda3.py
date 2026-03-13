@@ -13,7 +13,7 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3690# project name
+D=3687# project name
 P=1 #Experiment within project
 # seq="3622_1" # R script to be launched
 # Time sensitive parameters
@@ -73,8 +73,8 @@ if Pre_comp:
 
 if Infer:
 	os.chdir(path_4)
-	#os.system("echo 'Select DE genes and split cells'")
-	#os.system(f"python select_DEgenes_and_split.py -i {cwd}/OG{D}/{P} -s full -c 0 -r 0.6")
+	os.system("echo 'Select DE genes and split cells'")
+	os.system(f"python select_DEgenes_and_split.py -i {cwd}/OG{D}/{P} -s full -c 0 -r 0.6")
 	os.system("echo 'Get kinetic rates'")
 	os.system(f"python get_kinetic_rates.py -i {cwd}/OG{D}/{P} -s full")
 	os.system("echo 'infer_mixture'")
