@@ -13,7 +13,7 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3687# project name
+D=3691# project name
 P=1 #Experiment within project
 # seq="3622_1" # R script to be launched
 # Time sensitive parameters
@@ -68,7 +68,6 @@ if transform:
 	
 if Pre_comp:
 	os.system(f"cp  {cwd}/res_carda/data.h5ad "+path_6)
-	os.system(f"cp  {cwd}/res_carda/data_full.h5ad "+path_6)
 	os.system(f"cp  {cwd}/res_carda/table_halflife_mamalian.csv "+path_7)
 
 if Infer:
