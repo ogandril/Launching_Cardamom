@@ -13,13 +13,13 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3693# project name
+D=3697# project name
 P=1 #Experiment within project
 # seq="3622_1" # R script to be launched
 # Time sensitive parameters
-SFT=12.5 # time scale factor
-CC=20 # cell cycle time:
-f=10 # Stabilizing factor for mRNA (slows down the model)
+#SFT=12.5 # time scale factor
+#CC=20 # cell cycle time:
+#f=10 # Stabilizing factor for mRNA (slows down the model)
 Th_int=2.5 #threshold for interactions 
 
 # Which function should be executed
