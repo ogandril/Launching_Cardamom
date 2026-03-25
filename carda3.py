@@ -1,6 +1,5 @@
-# Launch CARDAMOM.V2 in one command line
+# Launch CARDAMOM-OT in one command line
 # create a new directory for each parameter combination
-# Still requires specific R script at that stage 
 # Start from /pbs/home/o/ogandril/
 
 import os
@@ -14,13 +13,8 @@ import sys
 cwd = os.getcwd()
 
 D=3700# project name
-P=1 #Experiment within project
-# seq="3622_1" # R script to be launched
-# Time sensitive parameters
-#SFT=12.5 # time scale factor
-#CC=20 # cell cycle time:
-#f=10 # Stabilizing factor for mRNA (slows down the model)
-Th_int=2.5 #threshold for interactions 
+P=2 #Experiment within project
+Th_int=2 #threshold for interactions 
 
 # Which function should be executed
 transform=0 # old to new
@@ -52,8 +46,6 @@ os.makedirs(path_8, exist_ok=True)  # Using os.makedirs is safer than os.system
 # Copy various files in the new folder
 # carda3; this file containing hyperparameters
 os.system("cp  Launching_Cardamom/carda3.py "+path_2)
-# The R script that was used for building the matrix
-# os.system(f"cp  res_carda/{seq} "+path_2)
 # The CARDAMOM basic parameters
 os.system(f"cp  CardaSC/cardamom_beta/model/base.py "+path_2)
 
