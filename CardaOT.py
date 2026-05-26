@@ -34,14 +34,14 @@ os.makedirs(path_2, exist_ok=True)
 # Define path and create folders
 path_4 = os.path.join(cwd, 'CardamomOT')
 path_3 = os.path.join(path_4, 'utils/old_to_new')
-path_5 = os.path.join(path_2, 'CardamomOT')
-os.makedirs(path_5, exist_ok=True)  # Using os.makedirs is safer than os.system
+path_5 = os.path.join(path_2, 'cardamomOT')
+os.makedirs(path_5, exist_ok=True)  
 path_6 = os.path.join(path_2, 'Data')
-os.makedirs(path_6, exist_ok=True)  # Using os.makedirs is safer than os.system
+os.makedirs(path_6, exist_ok=True)  
 path_7 = os.path.join(path_2, 'halflife')
-os.makedirs(path_7, exist_ok=True)  # Using os.makedirs is safer than os.system
+os.makedirs(path_7, exist_ok=True)  
 path_8 = os.path.join(path_2, 'Rates')
-os.makedirs(path_8, exist_ok=True)  # Using os.makedirs is safer than os.system
+os.makedirs(path_8, exist_ok=True)  
 
 # Copy various files in the new folder
 # carda3; this file containing hyperparameters
@@ -86,7 +86,6 @@ if Infer:
 
 	os.system("echo 'Infer network structure'")
 	os.system(f"python -m CardamomOT.cli step infer_network_structure -i {cwd}/OG{D}/{P} -s full")
-
 
 	# Save a csv version of the interaction matrix after applying a threshold
 	os.chdir(path_5)
