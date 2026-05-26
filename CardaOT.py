@@ -12,8 +12,8 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3700# project name
-P=2 #Experiment within project
+D=3726# project name
+P=1 #Experiment within project
 Th_int=2 #threshold for interactions 
 
 # Which function should be executed
@@ -87,17 +87,17 @@ if Infer:
 	os.system(f"python -m CardamomOT.cli step infer_network_structure -i {cwd}/OG{D}/{P} -s full")
 
 
-# Save a csv version of the interaction matrix after applying a threshold
-os.chdir(path_5)
-inter = np.load('inter.npy')
-# Cut off low intensity edges
-inter[abs(inter) < Th_int] = 0
-# Save the resulting matrix
-np.save('inter.npy', inter)
+	# Save a csv version of the interaction matrix after applying a threshold
+	os.chdir(path_5)
+	inter = np.load('inter.npy')
+	# Cut off low intensity edges
+	inter[abs(inter) < Th_int] = 0
+	# Save the resulting matrix
+	np.save('inter.npy', inter)
 
-# Save as .csv for R
-inter2D=inter[:, :, 0]
-np.savetxt('inter.csv', inter2D, delimiter=",")
+	# Save as .csv for R
+	inter2D=inter[:, :, 0]
+	np.savetxt('inter.csv', inter2D, delimiter=",")
 
 if simulate:	
 	os.chdir(path_4)
