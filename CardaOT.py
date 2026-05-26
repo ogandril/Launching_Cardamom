@@ -32,7 +32,7 @@ path_2 = os.path.join(path_1, str(P))
 os.makedirs(path_2, exist_ok=True)
 
 # Define path and create folders
-path_4 = os.path.join(cwd, 'CardaSC')
+path_4 = os.path.join(cwd, 'CardamomOT')
 path_3 = os.path.join(path_4, 'utils/old_to_new')
 path_5 = os.path.join(path_2, 'CardamomOT')
 os.makedirs(path_5, exist_ok=True)  # Using os.makedirs is safer than os.system
