@@ -76,7 +76,7 @@ if Infer:
 	os.system(f"python -m CardamomOT.cli step get_kinetic_rates -i {cwd}/OG{D}/{P}")
 
 	os.system("echo 'Select DE genes and split cells'")
-	os.system(f"python -m CardamomOT.cli step select_DEgenes_and_split -i {cwd}/OG{D}/{P} -s full -m 0.5")
+	os.system(f"python -m CardamomOT.cli step select_DEgenes_and_split -i {cwd}/OG{D}/{P} -s full -c 0 -m 0.5")
 
 	os.system("echo 'infer_mixture'")
 	os.system(f"python -m CardamomOT.cli step infer_mixture -i {cwd}/OG{D}/{P} -s full -m 0.5")
