@@ -13,7 +13,7 @@ import sys
 cwd = os.getcwd()
 
 D=3731# project name
-P=1 #Experiment within project
+P=2 #Experiment within project
 Th_int=2 #threshold for interactions 
 
 # Which function should be executed
@@ -76,10 +76,10 @@ if Infer:
 	os.system(f"python -m CardamomOT.cli step get_kinetic_rates -i {cwd}/OG{D}/{P}")
 
 	os.system("echo 'Select DE genes and split cells'")
-	os.system(f"python -m CardamomOT.cli step select_DEgenes_and_split -i {cwd}/OG{D}/{P} -s full -c 0 -m 0.5")
+	os.system(f"python -m CardamomOT.cli step select_DEgenes_and_split -i {cwd}/OG{D}/{P} -s full -c 0 -m 0.75")
 
 	os.system("echo 'infer_mixture'")
-	os.system(f"python -m CardamomOT.cli step infer_mixture -i {cwd}/OG{D}/{P} -s full -m 0.5")
+	os.system(f"python -m CardamomOT.cli step infer_mixture -i {cwd}/OG{D}/{P} -s full -m 0.75")
 
 	os.system("echo 'Check mixture vs data consistency'")
 	os.system(f"python -m CardamomOT.cli step check_mixture_to_data -i {cwd}/OG{D}/{P} -s full")
