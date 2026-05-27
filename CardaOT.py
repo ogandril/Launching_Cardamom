@@ -12,7 +12,7 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3726# project name
+D=3731# project name
 P=1 #Experiment within project
 Th_int=2 #threshold for interactions 
 
@@ -20,8 +20,8 @@ Th_int=2 #threshold for interactions
 transform=0 # old to new
 Pre_comp=1 # If a precomputed anndata is available
 Infer=1# to infer the GRN
-simulate=0# to simulate the GRN
-perturb=0# to perturb the GRN (KO/OV)
+simulate=1# to simulate the GRN
+perturb=1# to perturb the GRN (KO/OV)
 
 # Create a working directory
 path_1 = os.path.join(cwd, f"OG{D}")
