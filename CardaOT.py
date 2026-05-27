@@ -120,7 +120,7 @@ if simulate:
 if perturb:
 	# Write the genes to perturb.
 	os.chdir(path_6)
-	fichier = open('KO_OV_list.txt', 'w')
+	fichier = open('KO_OV_simulate.txt', 'w')
 	fichier.write('KO\tOV\n')
 	for arg in sys.argv[1:]:
 		fichier.write(str(arg+"\t0\n"))
