@@ -5,4 +5,4 @@
 #SBATCH --export=NONE
 module load Programming_Languages/python/3.12.2
 source cardamom_env/bin/activate
-python3 Launching_Cardamom/CardaOT.py $1
+python3 Launching_Cardamom/CardaOT.py $1 $2 $3 $4 $5 $6 $7 $8 $9
