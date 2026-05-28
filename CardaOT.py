@@ -103,7 +103,7 @@ if simulate:
 	os.chdir(path_4)
 
 	os.system("echo 'Simulate network'")
-	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} -s full")
+	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 	
 	os.system("echo 'Full simulation'")
 	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P} -s full")
