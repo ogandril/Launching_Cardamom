@@ -20,7 +20,7 @@ Th_int=2 #threshold for interactions
 transform=0 # old to new
 Pre_comp=1 # If a precomputed anndata is available
 Infer=1# to infer the GRN
-simulate=1# to simulate the GRN
+simulate=0# to simulate the GRN
 perturb=1# to perturb the GRN (KO/OV)
 
 # Create a working directory
@@ -118,6 +118,7 @@ if simulate:
 	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} -s full")
 
 if perturb:
+
 	# Write the genes to perturb.
 	os.chdir(path_6)
 	fichier = open('KO_OV_simulate.txt', 'w')
@@ -126,23 +127,24 @@ if perturb:
 		fichier.write(str(arg+"\t0\n"))
 		fichier.write("0\t"+str(arg+"\n"))
 	fichier.close()
+
 	# Excecute the perturbation
 	os.chdir(path_4)
 
 	os.system("echo 'Simulate network'")
-	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} -s full")
+	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 	
 	os.system("echo 'Full simulation'")
-	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P} -s full")
+	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 	
 	os.system("echo 'Final checks_1'")
-	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} -s full")
+	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 
 	os.system("echo 'Final checks_2'")
-	os.system(f"python -m CardamomOT.cli step simulate_network_KOV -i {cwd}/OG{D}/{P} -s full")
+	os.system(f"python -m CardamomOT.cli step simulate_network_KOV -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 
 	os.system("echo 'Final checks_3'")
-	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} -s full")
+	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 
 print('My work here is done')
 
