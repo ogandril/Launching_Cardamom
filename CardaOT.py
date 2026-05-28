@@ -13,8 +13,8 @@ import sys
 cwd = os.getcwd()
 
 D=3731# project name
-P=3 #Experiment within project
-Th_int=2 #threshold for interactions 
+P=4 #Experiment within project
+Th_int=2.5 #threshold for interactions 
 
 # Which function should be executed
 transform=0 # old to new
@@ -106,16 +106,16 @@ if simulate:
 	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 	
 	os.system("echo 'Full simulation'")
-	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P} -s full")
+	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P}  -s full")
 	
 	os.system("echo 'Final checks_1'")
-	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} -s full")
+	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 
 	os.system("echo 'Final checks_2'")
 	os.system(f"python -m CardamomOT.cli step simulate_network_KOV -i {cwd}/OG{D}/{P} -s full")
 
 	os.system("echo 'Final checks_3'")
-	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} -s full")
+	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 
 if perturb:
 
