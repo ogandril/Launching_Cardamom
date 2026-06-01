@@ -139,13 +139,13 @@ if perturb:
 	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P}  -s full")
 	
 	os.system("echo 'Final checks_1'")
-	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
+	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} --stimulus 0.22 --prior 0.0 -s full")
 
 	os.system("echo 'Final checks_2'")
 	os.system(f"python -m CardamomOT.cli step simulate_network_KOV -i {cwd}/OG{D}/{P} -s full")
 
 	os.system("echo 'Final checks_3'")
-	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
+	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} --stimulus 0.22 --prior 0.0 -s full")
 
 print('My work here is done')
 
