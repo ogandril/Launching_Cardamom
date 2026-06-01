@@ -12,8 +12,8 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3731# project name
-P=4 #Experiment within project
+D=3732# project name
+P=2 #Experiment within project
 Th_int=2.5 #threshold for interactions 
 
 # Which function should be executed
@@ -60,6 +60,7 @@ if transform:
 	
 if Pre_comp:
 	os.system(f"cp  {cwd}/res_carda/data.h5ad "+path_6)
+	os.system(f"cp  {cwd}/res_carda/ref_network.csv "+path_6)
 	os.system(f"cp  {cwd}/res_carda/table_halflife_mamalian.csv "+path_7)
 	# If uncorrected
 	os.system(f"cp  {cwd}/res_carda/data.h5ad {cwd}/res_carda/data_train.h5ad ")
@@ -85,7 +86,7 @@ if Infer:
 	os.system(f"python -m CardamomOT.cli step check_mixture_to_data -i {cwd}/OG{D}/{P} -s full")
 
 	os.system("echo 'Infer network structure'")
-	os.system(f"python -m CardamomOT.cli step infer_network_structure -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
+	os.system(f"python -m CardamomOT.cli step infer_network_structure -i {cwd}/OG{D}/{P} --stimulus 0.22 --prior 0.0 -s full")
 
 	# Save a csv version of the interaction matrix after applying a threshold
 	os.chdir(path_5)
