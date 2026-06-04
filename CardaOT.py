@@ -13,14 +13,14 @@ import sys
 cwd = os.getcwd()
 
 D=3732# project name
-P=4 #Experiment within project
+P=10 #Experiment within project
 Th_int=2.5 #threshold for interactions 
 
 # Which function should be executed
 transform=0 # old to new
 Pre_comp=1 # If a precomputed anndata is available
 Infer=1# to infer the GRN
-simulate=1# to simulate the GRN
+simulate=0# to simulate the GRN
 perturb=1# to perturb the GRN (KO/OV)
 
 # Create a working directory
