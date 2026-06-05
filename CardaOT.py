@@ -13,7 +13,7 @@ import sys
 cwd = os.getcwd()
 
 D=3736# project name
-P=4 #Experiment within project
+P=5 #Experiment within project
 Th_int=2.5 #threshold for interactions 
 
 # Which function should be executed
@@ -60,8 +60,7 @@ if transform:
 	
 if Pre_comp:
 	os.system(f"cp  {cwd}/res_carda/data.h5ad "+path_6)
-	os.system(f"cp  {cwd}/res_carda/inter_ref.npy "+path_6)
-	os.system("echo 'inter_ref.npy copied'")
+	os.system(f"cp  {cwd}/res_carda/inter_ref.csv "+path_6)
 	os.system(f"cp  {cwd}/res_carda/table_halflife_mamalian.csv "+path_7)
 	# If uncorrected
 	os.system(f"cp  {cwd}/res_carda/data.h5ad {cwd}/res_carda/data_train.h5ad ")
