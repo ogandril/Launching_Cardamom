@@ -12,16 +12,16 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3736# project name
-P=5 #Experiment within project
+D=3737# project name
+P=1 #Experiment within project
 Th_int=2.5 #threshold for interactions 
 
 # Which function should be executed
 transform=0 # old to new
 Pre_comp=1 # If a precomputed anndata is available
 Infer=1# to infer the GRN
-simulate=0# to simulate the GRN
-perturb=1# to perturb the GRN (KO/OV)
+simulate=1# to simulate the GRN
+perturb=0# to perturb the GRN (KO/OV)
 
 # Create a working directory
 path_1 = os.path.join(cwd, f"OG{D}")
@@ -60,8 +60,8 @@ if transform:
 	
 if Pre_comp:
 	os.system(f"cp  {cwd}/res_carda/data.h5ad "+path_6)
-	os.system(f"cp  {cwd}/res_carda/inter_ref.csv "+path_6)
-	os.system(f"cp  {cwd}/res_carda/table_halflife_mamalian.csv "+path_7)
+	#os.system(f"cp  {cwd}/res_carda/inter_ref.csv "+path_6)
+	#os.system(f"cp  {cwd}/res_carda/table_halflife_mamalian.csv "+path_7)
 	# If uncorrected
 	os.system(f"cp  {cwd}/res_carda/data.h5ad {cwd}/res_carda/data_train.h5ad ")
 	os.system(f"cp  {cwd}/res_carda/data_train.h5ad "+path_6)
