@@ -13,7 +13,7 @@ import sys
 cwd = os.getcwd()
 
 D=3737# project name
-P=1 #Experiment within project
+P=2 #Experiment within project
 Th_int=2.5 #threshold for interactions 
 
 # Which function should be executed
@@ -60,6 +60,7 @@ if transform:
 	
 if Pre_comp:
 	os.system(f"cp  {cwd}/res_carda/data.h5ad "+path_6)
+	os.system(f"cp  {cwd}/res_carda/gene_list.txt "+path_6)
 	#os.system(f"cp  {cwd}/res_carda/inter_ref.csv "+path_6)
 	#os.system(f"cp  {cwd}/res_carda/table_halflife_mamalian.csv "+path_7)
 	# If uncorrected
