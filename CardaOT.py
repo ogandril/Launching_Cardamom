@@ -12,15 +12,15 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3736# project name
-P=7 #Experiment within project
-Th_int=2.5 #threshold for interactions 
+D=3731# project name
+P=1 #Experiment within project
+Th_int=2 #threshold for interactions 
 
 # Which function should be executed
 transform=0 # old to new
 Pre_comp=1 # If a precomputed anndata is available
 Infer=1# to infer the GRN
-simulate=0# to simulate the GRN
+simulate=1# to simulate the GRN
 perturb=1# to perturb the GRN (KO/OV)
 
 # Create a working directory
@@ -60,9 +60,7 @@ if transform:
 	
 if Pre_comp:
 	os.system(f"cp  {cwd}/res_carda/data.h5ad "+path_6)
-	#os.system(f"cp  {cwd}/res_carda/gene_list.txt "+path_6)
-	os.system(f"cp  {cwd}/res_carda/inter_ref.csv "+path_6)
-	#os.system(f"cp  {cwd}/res_carda/table_halflife_mamalian.csv "+path_7)
+	os.system(f"cp  {cwd}/res_carda/table_halflife_mamalian.csv "+path_7)
 	# If uncorrected
 	os.system(f"cp  {cwd}/res_carda/data.h5ad {cwd}/res_carda/data_train.h5ad ")
 	os.system(f"cp  {cwd}/res_carda/data_train.h5ad "+path_6)
@@ -78,16 +76,16 @@ if Infer:
 	os.system(f"python -m CardamomOT.cli step get_kinetic_rates -i {cwd}/OG{D}/{P}")
 
 	os.system("echo 'Select DE genes and split cells'")
-	os.system(f"python -m CardamomOT.cli step select_DEgenes_and_split -i {cwd}/OG{D}/{P} -s full -c 0 --mean-forcing 0.75")
+	os.system(f"python -m CardamomOT.cli step select_DEgenes_and_split -i {cwd}/OG{D}/{P} -s full -c 0 -m 0.5")
 
 	os.system("echo 'infer_mixture'")
-	os.system(f"python -m CardamomOT.cli step infer_mixture -i {cwd}/OG{D}/{P} -s full --mean-forcing 0.75")
+	os.system(f"python -m CardamomOT.cli step infer_mixture -i {cwd}/OG{D}/{P} -s full -m 0.5")
 
 	os.system("echo 'Check mixture vs data consistency'")
 	os.system(f"python -m CardamomOT.cli step check_mixture_to_data -i {cwd}/OG{D}/{P} -s full")
 
 	os.system("echo 'Infer network structure'")
-	os.system(f"python -m CardamomOT.cli step infer_network_structure -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
+	os.system(f"python -m CardamomOT.cli step infer_network_structure -i {cwd}/OG{D}/{P} -s full")
 
 	# Save a csv version of the interaction matrix after applying a threshold
 	os.chdir(path_5)
@@ -105,22 +103,21 @@ if simulate:
 	os.chdir(path_4)
 
 	os.system("echo 'Simulate network'")
-	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} --stimulus 0.22-s full")
+	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} -s full")
 	
 	os.system("echo 'Full simulation'")
-	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P}  -s full")
+	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P} -s full")
 	
 	os.system("echo 'Final checks_1'")
-	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} --stimulus 0.22-s full")
+	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} -s full")
 
 	os.system("echo 'Final checks_2'")
 	os.system(f"python -m CardamomOT.cli step simulate_network_KOV -i {cwd}/OG{D}/{P} -s full")
 
 	os.system("echo 'Final checks_3'")
-	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
+	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} -s full")
 
 if perturb:
-
 	# Write the genes to perturb.
 	os.chdir(path_6)
 	fichier = open('KO_OV_simulate.txt', 'w')
@@ -129,24 +126,23 @@ if perturb:
 		fichier.write(str(arg+"\t0\n"))
 		fichier.write("0\t"+str(arg+"\n"))
 	fichier.close()
-
 	# Excecute the perturbation
 	os.chdir(path_4)
 
 	os.system("echo 'Simulate network'")
-	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
+	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} -s full")
 	
 	os.system("echo 'Full simulation'")
-	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P}  -s full")
+	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P} -s full")
 	
 	os.system("echo 'Final checks_1'")
-	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} --stimulus 0.22  --prior 1.0 -s full")
+	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} -s full")
 
 	os.system("echo 'Final checks_2'")
 	os.system(f"python -m CardamomOT.cli step simulate_network_KOV -i {cwd}/OG{D}/{P} -s full")
 
 	os.system("echo 'Final checks_3'")
-	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} --stimulus 0.22  --prior 1.0 -s full")
+	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} -s full")
 
 print('My work here is done')
 
