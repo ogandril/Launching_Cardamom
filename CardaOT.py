@@ -85,7 +85,7 @@ if Infer:
 	os.system(f"python -m CardamomOT.cli step check_mixture_to_data -i {cwd}/OG{D}/{P} -s full")
 
 	os.system("echo 'Infer network structure'")
-	os.system(f"python -m CardamomOT.cli step infer_network_structure -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
+	os.system(f"python -m CardamomOT.cli step infer_network_structure -i {cwd}/OG{D}/{P} --stimulus 0.22  --prior 0.5 -s full")
 
 	# Save a csv version of the interaction matrix after applying a threshold
 	os.chdir(path_5)
@@ -103,7 +103,7 @@ if simulate:
 	os.chdir(path_4)
 
 	os.system("echo 'Simulate network'")
-	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} --stimulus 0.22-s full")
+	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 	
 	os.system("echo 'Full simulation'")
 	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P}  -s full")
