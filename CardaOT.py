@@ -13,7 +13,7 @@ import sys
 cwd = os.getcwd()
 
 D=3740# project name
-P=10 #Experiment within project
+P=11 #Experiment within project
 Th_int=2 #threshold for interactions 
 
 # Which function should be executed
@@ -85,7 +85,7 @@ if Infer:
 	os.system(f"python -m CardamomOT.cli step check_mixture_to_data -i {cwd}/OG{D}/{P} -s full")
 
 	os.system("echo 'Infer network structure'")
-	os.system(f"python -m CardamomOT.cli step infer_network_structure -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
+	os.system(f"python -m CardamomOT.cli step infer_network_structure -i {cwd}/OG{D}/{P} -s full")
 
 	# Save a csv version of the interaction matrix after applying a threshold
 	os.chdir(path_5)
@@ -102,7 +102,7 @@ if simulate:
 	os.chdir(path_4)
 
 	os.system("echo 'Simulate network'")
-	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} --stimulus 0.22-s full")
+	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 	
 	# Save a csv version of the interaction matrix after applying a threshold
 	os.chdir(path_5)
@@ -142,7 +142,7 @@ if perturb:
 	os.chdir(path_4)
 
 	os.system("echo 'Simulate network'")
-	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
+	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P}  -s full")
 	
 	# Save a csv version of the interaction matrix after applying a threshold
 	os.chdir(path_5)
@@ -159,13 +159,13 @@ if perturb:
 	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P}  -s full")
 	
 	os.system("echo 'Final checks_1'")
-	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} --stimulus 0.22  --prior 1.0 -s full")
+	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} -s full")
 
 	os.system("echo 'Final checks_2'")
 	os.system(f"python -m CardamomOT.cli step simulate_network_KOV -i {cwd}/OG{D}/{P} -s full")
 
 	os.system("echo 'Final checks_3'")
-	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} --stimulus 0.22  --prior 1.0 -s full")
+	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} -s full")
 
 print('My work here is done')
 
