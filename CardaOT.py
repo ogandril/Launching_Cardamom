@@ -13,8 +13,8 @@ import sys
 cwd = os.getcwd()
 
 D=3740# project name
-P=7 #Experiment within project
-Th_int=2.5 #threshold for interactions 
+P=8 #Experiment within project
+Th_int=2 #threshold for interactions 
 
 # Which function should be executed
 transform=0 # old to new
@@ -60,7 +60,7 @@ if transform:
 	
 if Pre_comp:
 	os.system(f"cp  {cwd}/res_carda/data.h5ad "+path_6)
-	os.system(f"cp  {cwd}/res_carda/ref_network.csv "+path_6)
+	os.system(f"cp  {cwd}/res_carda/inter_ref.csv "+path_6)
 	# If uncorrected
 	os.system(f"cp  {cwd}/res_carda/data.h5ad {cwd}/res_carda/data_train.h5ad ")
 	os.system(f"cp  {cwd}/res_carda/data_train.h5ad "+path_6)
@@ -85,7 +85,7 @@ if Infer:
 	os.system(f"python -m CardamomOT.cli step check_mixture_to_data -i {cwd}/OG{D}/{P} -s full")
 
 	os.system("echo 'Infer network structure'")
-	os.system(f"python -m CardamomOT.cli step infer_network_structure -i {cwd}/OG{D}/{P} --stimulus 0.22  --prior 0.0 -s full")
+	os.system(f"python -m CardamomOT.cli step infer_network_structure -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 
 	# Save a csv version of the interaction matrix after applying a threshold
 	os.chdir(path_5)
@@ -94,7 +94,6 @@ if Infer:
 	inter[abs(inter) < Th_int] = 0
 	# Save the resulting matrix
 	np.save('inter.npy', inter)
-
 	# Save as .csv for R
 	inter2D=inter[:, :, 0]
 	np.savetxt('inter.csv', inter2D, delimiter=",")
@@ -103,19 +102,30 @@ if simulate:
 	os.chdir(path_4)
 
 	os.system("echo 'Simulate network'")
-	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} --stimulus 0.22 --prior 0.0 -s full")
+	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} --stimulus 0.22-s full")
 	
+	# Save a csv version of the interaction matrix after applying a threshold
+	os.chdir(path_5)
+	inter = np.load('inter_simul.npy')
+	# Cut off low intensity edges
+	inter[abs(inter) < Th_int] = 0
+	# Save the resulting matrix
+	np.save('inter_simul.npy', inter)
+	# Save as .csv for R
+	inter2D=inter[:, :, 0]
+	np.savetxt('inter_simul.csv', inter2D, delimiter=",")
+
 	os.system("echo 'Full simulation'")
 	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P}  -s full")
 	
 	os.system("echo 'Final checks_1'")
-	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} --stimulus 0.22  --prior 0.0 -s full")
+	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} --stimulus 0.22-s full")
 
 	os.system("echo 'Final checks_2'")
 	os.system(f"python -m CardamomOT.cli step simulate_network_KOV -i {cwd}/OG{D}/{P} -s full")
 
 	os.system("echo 'Final checks_3'")
-	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} --stimulus 0.22  --prior 0.0 -s full")
+	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 
 if perturb:
 
@@ -132,19 +142,30 @@ if perturb:
 	os.chdir(path_4)
 
 	os.system("echo 'Simulate network'")
-	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} --stimulus 0.22 --prior 0.0 -s full")
+	os.system(f"python -m CardamomOT.cli step infer_network_simul -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 	
+	# Save a csv version of the interaction matrix after applying a threshold
+	os.chdir(path_5)
+	inter = np.load('inter_simul.npy')
+	# Cut off low intensity edges
+	inter[abs(inter) < Th_int] = 0
+	# Save the resulting matrix
+	np.save('inter_simul.npy', inter)
+	# Save as .csv for R
+	inter2D=inter[:, :, 0]
+	np.savetxt('inter_simul.csv', inter2D, delimiter=",")
+
 	os.system("echo 'Full simulation'")
 	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P}  -s full")
 	
 	os.system("echo 'Final checks_1'")
-	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} --stimulus 0.22  --prior 0.0 -s full")
+	os.system(f"python -m CardamomOT.cli step check_sim_to_data -i {cwd}/OG{D}/{P} --stimulus 0.22  --prior 1.0 -s full")
 
 	os.system("echo 'Final checks_2'")
 	os.system(f"python -m CardamomOT.cli step simulate_network_KOV -i {cwd}/OG{D}/{P} -s full")
 
 	os.system("echo 'Final checks_3'")
-	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} --stimulus 0.22  --prior 0.0 -s full")
+	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} --stimulus 0.22  --prior 1.0 -s full")
 
 print('My work here is done')
 
