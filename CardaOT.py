@@ -13,7 +13,7 @@ import sys
 cwd = os.getcwd()
 
 D=3747# project name
-P=3 #Experiment within project
+P=4 #Experiment within project
 Th_int=2 #threshold for interactions 
 
 # Which function should be executed
