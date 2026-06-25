@@ -13,7 +13,7 @@ import sys
 cwd = os.getcwd()
 
 D=3747# project name
-P=6 #Experiment within project
+P=8 #Experiment within project
 Th_int=2 #threshold for interactions 
 
 # Which function should be executed
@@ -90,10 +90,6 @@ if Infer:
 	# Save a csv version of the interaction matrix after applying a threshold
 	os.chdir(path_5)
 	inter = np.load('inter.npy')
-	# Cut off low intensity edges
-	inter[abs(inter) < Th_int] = 0
-	# Save the resulting matrix
-	np.save('inter.npy', inter)
 	# Save as .csv for R
 	inter2D=inter[:, :, 0]
 	np.savetxt('inter.csv', inter2D, delimiter=",")
@@ -107,10 +103,6 @@ if simulate:
 	# Save a csv version of the interaction matrix after applying a threshold
 	os.chdir(path_5)
 	inter = np.load('inter_simul.npy')
-	# Cut off low intensity edges
-	inter[abs(inter) < Th_int] = 0
-	# Save the resulting matrix
-	np.save('inter_simul.npy', inter)
 	# Save as .csv for R
 	inter2D=inter[:, :, 0]
 	np.savetxt('inter_simul.csv', inter2D, delimiter=",")
@@ -147,10 +139,6 @@ if perturb:
 	# Save a csv version of the interaction matrix after applying a threshold
 	os.chdir(path_5)
 	inter = np.load('inter_simul.npy')
-	# Cut off low intensity edges
-	inter[abs(inter) < Th_int] = 0
-	# Save the resulting matrix
-	np.save('inter_simul.npy', inter)
 	# Save as .csv for R
 	inter2D=inter[:, :, 0]
 	np.savetxt('inter_simul.csv', inter2D, delimiter=",")
