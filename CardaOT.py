@@ -143,7 +143,7 @@ if perturb:
 	inter = inter * np.mean(inter_ref) / np.mean(inter)
 	# Cut off low intensity edges
 	inter[abs(inter) < Th_int] = 0
-	inter_ref[abs(inter) < Th_int] = 0
+	inter_ref[abs(inter[:, :, 0]) < Th_int] = 0
 	# Save the resulting matrix
 	np.save('inter_simul.npy', inter)
 	np.save('inter_ref.npy', inter_ref)
