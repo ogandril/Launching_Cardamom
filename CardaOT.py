@@ -13,7 +13,7 @@ import sys
 cwd = os.getcwd()
 
 D=3747# project name
-P=8 #Experiment within project
+P=9 #Experiment within project
 Th_int=2 #threshold for interactions 
 
 # Which function should be executed
@@ -139,9 +139,19 @@ if perturb:
 	# Save a csv version of the interaction matrix after applying a threshold
 	os.chdir(path_5)
 	inter = np.load('inter_simul.npy')
+	inter_ref = np.load('inter_ref.npy')
+	inter = inter * np.mean(inter_ref) / np.mean(inter)
+	# Cut off low intensity edges
+	inter[abs(inter) < Th_int] = 0
+	inter_ref[abs(inter) < Th_int] = 0
+	# Save the resulting matrix
+	np.save('inter_simul.npy', inter)
+	np.save('inter_ref.npy', inter_ref)
 	# Save as .csv for R
 	inter2D=inter[:, :, 0]
 	np.savetxt('inter_simul.csv', inter2D, delimiter=",")
+	np.savetxt('inter_ref.csv', inter_ref, delimiter=",") 
+
 
 	os.system("echo 'Full simulation'")
 	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P}  -s full")
