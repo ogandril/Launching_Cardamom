@@ -12,8 +12,8 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3752# project name
-P=3 #Experiment within project
+D=3753# project name
+P=1 #Experiment within project
 Th_int=2.5 #threshold for interactions 
 
 # Which function should be executed
@@ -141,9 +141,6 @@ if perturb:
 	inter = np.load('inter_simul.npy')
 	inter_ref = np.load('inter_ref.npy')
 	inter = inter * np.mean(inter_ref) / np.mean(inter)
-	# Cut off low intensity edges
-	inter[abs(inter) < Th_int] = 0
-	inter_ref[abs(inter[:, :, 0]) < Th_int] = 0
 	# Save the resulting matrix
 	np.save('inter_simul.npy', inter)
 	np.save('inter_ref.npy', inter_ref)
