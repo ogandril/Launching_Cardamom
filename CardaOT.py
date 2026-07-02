@@ -12,9 +12,8 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3753# project name
-P=5 #Experiment within project
-Th_int=2.5 #threshold for interactions 
+D=3756# project name
+P=1 #Experiment within project
 
 # Which function should be executed
 transform=0 # old to new
