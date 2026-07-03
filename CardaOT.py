@@ -13,7 +13,7 @@ import sys
 cwd = os.getcwd()
 
 D=3757# project name
-P=1 #Experiment within project
+P=2 #Experiment within project
 
 # Which function should be executed
 transform=0 # old to new
