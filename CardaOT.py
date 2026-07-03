@@ -12,8 +12,8 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3756# project name
-P=4 #Experiment within project
+D=3757# project name
+P=1 #Experiment within project
 
 # Which function should be executed
 transform=0 # old to new
