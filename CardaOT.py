@@ -13,7 +13,7 @@ import sys
 cwd = os.getcwd()
 
 D=3757# project name
-P=3 #Experiment within project
+P=1 #Experiment within project
 
 # Which function should be executed
 transform=0 # old to new
@@ -119,11 +119,14 @@ if simulate:
 	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 
 if perturb:
+
 	# Write the genes to perturb.
 	os.chdir(path_6)
-	fichier = open('KO_OV_list.txt', 'w')
+	fichier = open('KO_OV_simulate.txt', 'w')
 	fichier.write('KO\tOV\n')
-	fichier.write('STMN4\tCENPF\n')
+	for arg in sys.argv[1:]:
+		fichier.write(str(arg+"\t0\n"))
+		fichier.write("0\t"+str(arg+"\n"))
 	fichier.close()
 
 	# Excecute the perturbation
