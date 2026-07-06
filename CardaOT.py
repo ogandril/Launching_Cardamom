@@ -123,8 +123,8 @@ if perturb:
 	os.chdir(path_6)
 	fichier = open('KO_OV_simulate.txt', 'w')
 	fichier.write('KO\tOV\n')
-	fichier.write('TCF4\tPLK1\n')
-	fichier.write('PLK1\tTCF4\n')
+	fichier.write('TCF4, PLK1\t0\n')
+	fichier.write('0\tTCF4, PLK1\n')
 	fichier.close()
 
 	# Excecute the perturbation
