@@ -124,6 +124,7 @@ if perturb:
 	fichier = open('KO_OV_simulate.txt', 'w')
 	fichier.write('KO\tOV\n')
 	fichier.write('TCF4\tPLK1\n')
+	fichier.write('PLK1\tTCF4\n')
 	fichier.close()
 
 	# Excecute the perturbation
