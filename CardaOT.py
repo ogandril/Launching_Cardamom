@@ -59,7 +59,7 @@ if transform:
 	
 if Pre_comp:
 	os.system(f"cp  {cwd}/res_carda/data.h5ad "+path_6)
-	os.system(f"cp  {cwd}/res_carda/inter_ref.csv "+path_6)
+	#os.system(f"cp  {cwd}/res_carda/inter_ref.csv "+path_6)
 	# If uncorrected
 	os.system(f"cp  {cwd}/res_carda/data.h5ad {cwd}/res_carda/data_train.h5ad ")
 	os.system(f"cp  {cwd}/res_carda/data_train.h5ad "+path_6)
