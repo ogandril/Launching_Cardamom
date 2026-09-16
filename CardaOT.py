@@ -13,14 +13,14 @@ import sys
 cwd = os.getcwd()
 
 D=3798# project name
-P=2 #Experiment within project
+P=3 #Experiment within project
 
 # Which function should be executed
 transform=0 # old to new
 Pre_comp=1 # If a precomputed anndata is available
 Infer=1# to infer the GRN
 simulate=1# to simulate the GRN
-perturb=0# to perturb the GRN (KO/OV)
+perturb=1# to perturb the GRN (KO/OV)
 
 # Create a working directory
 path_1 = os.path.join(cwd, f"OG{D}")
