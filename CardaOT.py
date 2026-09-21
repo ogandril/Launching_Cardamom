@@ -12,8 +12,8 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3798# project name
-P=3 #Experiment within project
+D=3806# project name
+P=1 #Experiment within project
 
 # Which function should be executed
 transform=0 # old to new
@@ -122,6 +122,12 @@ if perturb:
 	# Write the genes to perturb.
 	os.chdir(path_6)
 	fichier = open('KO_OV_simulate.txt', 'w')
+	fichier.write('KO\tOV\n')
+	fichier.write('TCF4\t0\n')
+	fichier.write('0\tTCF4\n')
+	fichier.close()
+
+	fichier = open('KO_OV.txt', 'w')
 	fichier.write('KO\tOV\n')
 	fichier.write('TCF4\t0\n')
 	fichier.write('0\tTCF4\n')
