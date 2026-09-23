@@ -71,8 +71,8 @@ if Pre_comp:
 if infer:
 	os.chdir(path_4)
 
-	os.system("echo 'Get kinetic rates'")
-	os.system(f"python -m CardamomOT.cli step get_kinetic_rates -i {cwd}/OG{D}/{P}")
+	os.system("echo 'Get_degradation_rates.py'")
+	os.system(f"python -m CardamomOT.cli step get_degradation_rates -i {cwd}/OG{D}/{P}")
 
 	os.system("echo 'Select DE genes and split cells'")
 	os.system(f"python -m CardamomOT.cli step select_DEgenes_and_split -i {cwd}/OG{D}/{P} -s full -c 0 --mean-forcing 0.75")
