@@ -18,7 +18,7 @@ P=1 #Experiment within project
 # Which function should be executed
 transform=0 # old to new
 Pre_comp=1 # If a precomputed anndata is available
-Infer=1# to infer the GRN
+infer=1# to infer the GRN
 simulate=0# to simulate the GRN
 perturb=1# to perturb the GRN (KO/OV)
 
@@ -68,7 +68,7 @@ if Pre_comp:
 	os.system(f"cp  {cwd}/res_carda/data.h5ad {cwd}/res_carda/data_full.h5ad ")
 	os.system(f"cp  {cwd}/res_carda/data_full.h5ad "+path_6)
 
-if Infer:
+if infer:
 	os.chdir(path_4)
 
 	os.system("echo 'Get kinetic rates'")
@@ -142,15 +142,10 @@ if perturb:
 	# Save a csv version of the interaction matrix after applying a threshold
 	os.chdir(path_5)
 	inter = np.load('inter_simul.npy')
-	inter_ref = np.load('inter_ref.npy')
-	inter = inter * np.mean(inter_ref) / np.mean(inter)
-	# Save the resulting matrix
 	np.save('inter_simul.npy', inter)
-	np.save('inter_ref.npy', inter_ref)
 	# Save as .csv for R
 	inter2D=inter[:, :, 0]
 	np.savetxt('inter_simul.csv', inter2D, delimiter=",")
-	np.savetxt('inter_ref.csv', inter_ref, delimiter=",") 
 
 	os.system("echo 'Full simulation'")
 	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P}  -s full")
