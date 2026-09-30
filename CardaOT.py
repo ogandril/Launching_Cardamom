@@ -12,13 +12,13 @@ import sys
 # Pathways and files
 cwd = os.getcwd()
 
-D=3814# project name
+D=3817# project name
 P=1 #Experiment within project
 
 # Which function should be executed
 transform=0 # old to new
 Pre_comp=1 # If a precomputed anndata is available
-infer=1# to infer the GRN
+Infer=1# to infer the GRN
 simulate=0# to simulate the GRN
 perturb=1# to perturb the GRN (KO/OV)
 
@@ -59,7 +59,7 @@ if transform:
 	
 if Pre_comp:
 	os.system(f"cp  {cwd}/res_carda/data.h5ad "+path_6)
-	#os.system(f"cp  {cwd}/res_carda/inter_ref.csv "+path_6)
+	os.system(f"cp  {cwd}/res_carda/inter_ref.csv "+path_6)
 	# If uncorrected
 	os.system(f"cp  {cwd}/res_carda/data.h5ad {cwd}/res_carda/data_train.h5ad ")
 	os.system(f"cp  {cwd}/res_carda/data_train.h5ad "+path_6)
@@ -68,11 +68,11 @@ if Pre_comp:
 	os.system(f"cp  {cwd}/res_carda/data.h5ad {cwd}/res_carda/data_full.h5ad ")
 	os.system(f"cp  {cwd}/res_carda/data_full.h5ad "+path_6)
 
-if infer:
+if Infer:
 	os.chdir(path_4)
 
-	os.system("echo 'Get_degradation_rates.py'")
-	os.system(f"python -m CardamomOT.cli step get_degradation_rates -i {cwd}/OG{D}/{P}")
+	os.system("echo 'Get kinetic rates'")
+	os.system(f"python -m CardamomOT.cli step get_kinetic_rates -i {cwd}/OG{D}/{P}")
 
 	os.system("echo 'Select DE genes and split cells'")
 	os.system(f"python -m CardamomOT.cli step select_DEgenes_and_split -i {cwd}/OG{D}/{P} -s full -c 0 --mean-forcing 0.75")
@@ -119,18 +119,14 @@ if simulate:
 	os.system(f"python -m CardamomOT.cli step check_KOV_to_sim -i {cwd}/OG{D}/{P} --stimulus 0.22 -s full")
 
 if perturb:
+
 	# Write the genes to perturb.
 	os.chdir(path_6)
 	fichier = open('KO_OV_simulate.txt', 'w')
 	fichier.write('KO\tOV\n')
-	fichier.write('TCF4\t0\n')
-	fichier.write('0\tTCF4\n')
-	fichier.close()
-
-	fichier = open('KO_OV.txt', 'w')
-	fichier.write('KO\tOV\n')
-	fichier.write('TCF4\t0\n')
-	fichier.write('0\tTCF4\n')
+	for arg in sys.argv[1:]:
+		fichier.write(str(arg+"\t0\n"))
+		fichier.write("0\t"+str(arg+"\n"))
 	fichier.close()
 
 	# Excecute the perturbation
@@ -142,10 +138,15 @@ if perturb:
 	# Save a csv version of the interaction matrix after applying a threshold
 	os.chdir(path_5)
 	inter = np.load('inter_simul.npy')
+	inter_ref = np.load('inter_ref.npy')
+	inter = inter * np.mean(inter_ref) / np.mean(inter)
+	# Save the resulting matrix
 	np.save('inter_simul.npy', inter)
+	np.save('inter_ref.npy', inter_ref)
 	# Save as .csv for R
 	inter2D=inter[:, :, 0]
 	np.savetxt('inter_simul.csv', inter2D, delimiter=",")
+	np.savetxt('inter_ref.csv', inter_ref, delimiter=",") 
 
 	os.system("echo 'Full simulation'")
 	os.system(f"python -m CardamomOT.cli step simulate_network -i {cwd}/OG{D}/{P}  -s full")
